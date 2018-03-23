@@ -20,20 +20,20 @@ interface Event
     public const BOTH = 3;
 
     // 添加定时器事件
-    public function addTimer($after , $repeat , callable $callback);
+    public static function addTimer(int $after , bool $repeat , callable $callback);
 
     // 添加 io 事件
-    public function addIo($fd , $flag , callable $callback);
+    public static function addIo($fd , int $flag , callable $callback);
 
     // 添加 信号事件
-    public function addSignal($signum , callable $callback);
+    public static function addSignal(int $signum , callable $callback);
 
     // 开始监听
-    public function loop();
+    public static function loop();
 
     // 删除事件标识符
     // 为了避免新进一个链接,产生一个 链接标识符
     // 链接断开后,该连接标识符仍然还在
     // 持续这样的话,会导致内存使用量持续增加
-    public function delete($key);
+    public static function delete(string $id);
 }

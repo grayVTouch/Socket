@@ -5,18 +5,22 @@
     <title>Title</title>
 </head>
 <body>
+
 请输入要发送的数据: <input type="text" id="send" /><br />
 发送按钮:<button id="send-btn">发送</button><br />
 接收到服务器的相应:<span id="rec">无</span>
+
 <script>
     (function(){
         "use strict";
 
-        var ws = new WebSocket('ws://127.0.0.1:9005');
+        var url = "ws://ws.com/ws";
+        var ws = new WebSocket(url);
         var connected = false;
 
         ws.addEventListener('open' , function(){
             connected = true;
+
             console.log("websocket 链接成功");
         });
 
@@ -43,9 +47,16 @@
 
                 var msg = send.value;
 
+                if (msg === '关闭') {
+                    // connected = false;
+                    ws.close();
+                    return ;
+                }
+
                 ws.send(msg);
             }
         } , false);
+
     })();
 </script>
 </body>

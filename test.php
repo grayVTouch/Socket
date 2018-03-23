@@ -15,11 +15,11 @@ use Event\Select;
 $s = new Select();
 
 $s->addTimer(1 , true , function(){
-    var_dump("2s 后触发的定时器");
+    // var_dump("2s 后触发的定时器");
 });
 
 $s->addTimer(4 , true , function(){
-    var_dump("4s 后触发的定时器");
+    // var_dump("4s 后触发的定时器");
 });
 
 $s->addSignal(SIGTERM , function(){
@@ -28,13 +28,16 @@ $s->addSignal(SIGTERM , function(){
 
 // 添加 socket 事件
 $tcp = 'tcp://127.0.0.1:9005';
+// $tcp1 = 'tcp://127.0.0.1:9006';
 
+// 作为服务端
 $server = stream_socket_server($tcp , $errno , $errstr , STREAM_SERVER_BIND | STREAM_SERVER_LISTEN);
+
 
 $s->addIo($server , Event::READ , function($socket) use($s){
     $client = stream_socket_accept($socket);
 
-    var_dump('接收到客户端链接');
+    // var_dump($client);
 
     stream_set_blocking($client , false);
 
@@ -43,6 +46,10 @@ $s->addIo($server , Event::READ , function($socket) use($s){
 
         if (!empty($msg)) {
             var_dump($msg);
+
+            sleep(3);
+
+            fwrite($client , '服务端响应');
         }
     });
 });

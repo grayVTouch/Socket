@@ -13,26 +13,36 @@ class Ev implements Event
 {
     // 必须:保存所有注册的事件
     // 否则事件不会执行
-    protected $_events = [];
+    public static $events = [];
 
-    public function addTimer($after , $repeat , callable $callback) {
-        $this->_events[] = new EvTimer($after , $repeat , $callback);
+    public static function addTimer(int $after , bool $repeat , callable $callback) {
+        $id = random(256 , 'mixed' , true);
+
+        static::$events[$id] = new \EvTimer($after , $repeat , $callback);
     }
 
-    public function addIo($fd , $flag , callable $callback){
-        $flag = $flag === self::READ ? Ev::READ : ($flag === self::WRITE ? Ev::WRITE : Ev::READ | Ev::WRITE);
-        $this->_events[] = new EvIo($fd , $flag , $callback);
+    public static function addIo($fd , int $flag , callable $callback){
+        $flag   = $flag === self::READ ? Ev::READ : ($flag === self::WRITE ? Ev::WRITE : Ev::READ | Ev::WRITE);
+        $id     = random(256 , 'mixed' , true);
+
+        static::$events[$id] = new \EvIo($fd , $flag , $callback);
     }
 
-    public function addSignal($signum , callable $callback){
-        $this->_events[] = new EvSignal($signum , $callback);
+    public static function addSignal(int $signum , callable $callback){
+        $id = random(256 , 'mixed' , true);
+
+        static::$events[$id] = new \EvSignal($signum , $callback);
     }
 
-    public function loop(){
+    public static function loop(){
         Ev::run();
     }
 
-    public function delete($key){
+    public static function delete(string $id){
+        if (isset(static::$events[$id])) {
+            unset(static::$events[$id]);
+        }
 
+        return $id;
     }
 }

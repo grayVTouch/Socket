@@ -10,11 +10,11 @@ require_once './event/Event.php';
 require_once './event/Select.php';
 require_once './function/url.php';
 require_once './function/array.php';
-require_once './protocols/WebSocket.php';
+require_once './protocol/WebSocket.php';
 
 use Event\Event;
 use Event\Select;
-use Protocols\WebSocket;
+use Protocol\WebSocket;
 
 $tcp = 'tcp://127.0.0.1:9005';
 

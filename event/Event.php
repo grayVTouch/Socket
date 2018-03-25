@@ -20,13 +20,13 @@ interface Event
     public const BOTH = 3;
 
     // 添加定时器事件
-    public static function addTimer(int $after , bool $repeat , callable $callback);
+    public static function addTimer(int $after , bool $repeat , $callback , $args = null);
 
     // 添加 io 事件
-    public static function addIo($fd , int $flag , callable $callback);
+    public static function addIo($fd , int $flag , $callback , $args = null);
 
     // 添加 信号事件
-    public static function addSignal(int $signum , callable $callback);
+    public static function addSignal(int $signum , $callback , $args = null);
 
     // 开始监听
     public static function loop();

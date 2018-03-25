@@ -9,7 +9,7 @@
 namespace Connection;
 
 
-class UdpConnection
+class UdpConnection implements Connection
 {
-
+    use TraitConnection;
 }

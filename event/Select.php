@@ -39,7 +39,7 @@ class Select implements Event
     public static $resource = [];
 
     // 添加定时器
-    public static function  addTimer(int $after , bool $repeat , callable $callback){
+    public static function addTimer(int $after , bool $repeat , $callback , $args = null){
         $id = random(256 , 'mixed' , true);
 
         static::$events[$id] = true;
@@ -47,12 +47,13 @@ class Select implements Event
         static::$timerFunctions[$id] = [
             'after'     => $after ,
             'repeat'    => $repeat ,
-            'callback'  => $callback
+            'callback'  => $callback ,
+            'args'      => $args
         ];
     }
 
     // 添加 io 事件
-    public static function  addIo($fd , int $flag , callable $callback , array $except = [] , $wait_s = 0 , $wait_ns = 0){
+    public static function addIo($fd , int $flag , $callback , $args = null , array $except = [] , $wait_s = 0 , $wait_ns = 0){
         $id = random(256 , 'mixed' , true);
 
         static::$events[$id] = true;
@@ -61,6 +62,7 @@ class Select implements Event
             'fd'        => $fd ,
             'flag'      => $flag ,
             'callback'  => $callback ,
+            'args'      => $args ,
             'except'    => $except ,
             'wait_s'    => $wait_s ,
             'wait_ns'   => $wait_ns
@@ -68,22 +70,25 @@ class Select implements Event
     }
 
     // 添加信号事件
-    public static function  addSignal(int $signal , callable $callback){
+    public static function addSignal(int $signal , $callback , $args = null){
         $id = random(256 , 'mixed' , true);
 
         static::$events[$id] = true;
 
         static::$signalFunctions[$id] = [
             'signal'    => $signal ,
-            'callback'  => $callback
+            'callback'  => $callback ,
+            'args'      => $args
         ];
 
         // 安装信号处理
-        pcntl_signal($signal , $callback);
+        pcntl_signal($signal , function() use($callback , $args){
+            call_user_func($callback , $args);
+        });
     }
 
     // 开始循环
-    public static function  loop(){
+    public static function loop(){
         static::$sTime = time();
 
         while (true)
@@ -132,7 +137,7 @@ class Select implements Event
             }
 
             // 触发定时器事件
-            call_user_func($v['callback']);
+            call_user_func($v['callback'] , $v['args']);
 
             if (!$v['repeat'] && !isset($v['is_trigger'])) {
                 // 设置触发标志
@@ -159,14 +164,14 @@ class Select implements Event
             if ($v['flag'] === self::READ || $v['flag'] === self::BOTH) {
                 foreach ($read as $v1)
                 {
-                    call_user_func($v['callback'] , $v1);
+                    call_user_func($v['callback'] , $v1 , $v['args']);
                 }
             }
 
             if ($v['flag'] === self::WRITE || $v['flag'] === self::BOTH) {
                 foreach ($write as $v1)
                 {
-                    call_user_func($v['callback'] , $v1);
+                    call_user_func($v['callback'] , $v1 , $v['args']);
                 }
             }
         }
@@ -180,7 +185,7 @@ class Select implements Event
 
     // 删除时间
     // @param $id ID
-    public static function  delete(string $id){
+    public static function delete(string $id){
         // 从已定义的事件列表中删除指定事件，如果有的话
         if (isset(static::$events[$id])) {
             unset(static::$events[$id]);

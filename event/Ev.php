@@ -15,27 +15,33 @@ class Ev implements Event
     // 否则事件不会执行
     public static $events = [];
 
-    public static function addTimer(int $after , bool $repeat , callable $callback) {
+    public static function addTimer(int $after , bool $repeat , $callback , $args = null) {
         $id = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvTimer($after , $repeat , $callback);
+        static::$events[$id] = new \EvTimer($after , $repeat , function() use($callback , $args){
+            call_user_func($callback , $args);
+        });
     }
 
-    public static function addIo($fd , int $flag , callable $callback){
-        $flag   = $flag === self::READ ? Ev::READ : ($flag === self::WRITE ? Ev::WRITE : Ev::READ | Ev::WRITE);
+    public static function addIo($fd , int $flag , $callback , $args = null){
+        $flag   = $flag === self::READ ? \Ev::READ : ($flag === self::WRITE ? \Ev::WRITE : \Ev::READ | \Ev::WRITE);
         $id     = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvIo($fd , $flag , $callback);
+        static::$events[$id] = new \EvIo($fd , $flag , function() use($fd , $callback , $args){
+            call_user_func($callback , $fd , $args);
+        });
     }
 
-    public static function addSignal(int $signum , callable $callback){
+    public static function addSignal(int $signum , $callback , $args = null){
         $id = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvSignal($signum , $callback);
+        static::$events[$id] = new \EvSignal($signum , function() use($callback , $args){
+            call_user_func($callback , $args);
+        });
     }
 
     public static function loop(){
-        Ev::run();
+        \Ev::run();
     }
 
     public static function delete(string $id){

@@ -9,7 +9,7 @@
 namespace Connection;
 
 
-class TcpConnection
+class TcpConnection implements Connection
 {
-
+    use TraitConnection;
 }

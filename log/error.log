@@ -1,1672 +1,395 @@
 ----- Error Start -----
-Error: Time:2018-03-26 14:04:46  File:/var/Website/Socket/core/Application.php  Line:468  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(468)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(606)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
+Error: Time:2018-03-27 14:51:18  File:/var/Website/Socket/core/Forward.php  Line:473  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(473)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(749)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 14:05:31  File:/var/Website/Socket/core/Application.php  Line:468  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(468)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(606)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:07:11  File:/var/Website/Socket/core/Application.php  Line:468  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(468)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(606)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:07:11  File:/var/Website/Socket/core/Application.php  Line:366  Message:Undefined property: Core\Application::$_protocol
-#0 /var/Website/Socket/core/Application.php Core\Application->server(300)
-#1 /var/Website/Socket/core/Application.php Core\Application->_listenForChild(246)
-#2 /var/Website/Socket/core/Application.php Core\Application->fork(612)
-#3 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:07:11  File:/var/Website/Socket/core/Application.php  Line:370  Message:Undefined property: Core\Application::$_address
-#0 /var/Website/Socket/core/Application.php Core\Application->server(300)
-#1 /var/Website/Socket/core/Application.php Core\Application->_listenForChild(246)
-#2 /var/Website/Socket/core/Application.php Core\Application->fork(612)
-#3 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:07:11  File:/var/Website/Socket/core/Application.php  Line:374  Message:stream_socket_server(): unable to connect to tcp:// (Failed to parse address "")
-#0 /var/Website/Socket/core/Application.php stream_socket_server(374)
-#1 /var/Website/Socket/core/Application.php Core\Application->server(300)
-#2 /var/Website/Socket/core/Application.php Core\Application->_listenForChild(246)
-#3 /var/Website/Socket/core/Application.php Core\Application->fork(612)
-#4 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:07:11  File:/var/Website/Socket/core/Application.php  Line:280  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(225)
-#5 /var/Website/Socket/core/Application.php Core\Application->fork(612)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:19:36  File:/var/Website/Socket/core/Application.php  Line:467  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (467)
-#1 /var/Website/Socket/core/Application.php Core\Application->(605)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:21:21  File:/var/Website/Socket/core/Application.php  Line:467  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (467)
-#1 /var/Website/Socket/core/Application.php Core\Application->(605)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:23:43  File:/var/Website/Socket/core/Application.php  Line:467  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (467)
-#1 /var/Website/Socket/core/Application.php Core\Application->(605)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:23:45  File:/var/Website/Socket/core/Application.php  Line:328  Message:Undefined property: Core\Application::$_protocol
-#0 unknow Core\Application->(unknow)
-#1 /var/Website/Socket/event/Ev.php (31)
-#2 unknow Event\Ev::(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::(248)
-#5 /var/Website/Socket/core/Application.php Core\Application->(611)
-#6 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:26:08  File:/var/Website/Socket/core/Application.php  Line:470  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (470)
-#1 /var/Website/Socket/core/Application.php Core\Application->(608)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:26:11  File:/var/Website/Socket/core/Application.php  Line:331  Message:Undefined variable: config
-#0 unknow Core\Application->(unknow)
-#1 /var/Website/Socket/event/Ev.php (31)
-#2 unknow Event\Ev::(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::(248)
-#5 /var/Website/Socket/core/Application.php Core\Application->(614)
-#6 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:26:32  File:/var/Website/Socket/core/Application.php  Line:470  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (470)
-#1 /var/Website/Socket/core/Application.php Core\Application->(608)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:43:47  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (475)
-#1 /var/Website/Socket/core/Application.php Core\Application->(628)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:43:49  File:/var/Website/Socket/core/Application.php  Line:286  Message:Undefined index: 
-#0 unknow Core\Application->(unknow)
-#1 /var/Website/Socket/event/Ev.php (31)
-#2 unknow Event\Ev::(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::(231)
-#5 /var/Website/Socket/core/Application.php Core\Application->(637)
-#6 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:44:51  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (475)
-#1 /var/Website/Socket/core/Application.php Core\Application->(628)
-#2 /var/Website/Socket/app.php Core\Application->(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:45:53  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (475)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(628)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:47:23  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (475)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(628)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:53:14  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (475)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(645)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ FetalError Start -----
-Error: Time:2018-03-26 14:53:21  File:/var/Website/Socket/core/Logs.php  Line:125  Message:Undefined index: Function
------ FetalError End ------
-
------ FetalError Start -----
-Error: Time:2018-03-26 14:53:21  File:/var/Website/Socket/core/Logs.php  Line:125  Message:Undefined index: Function
------ FetalError End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:53:21  File:/var/Website/Socket/core/Application.php  Line:674  Message:Undefined property: Core\Application::$log
-#0 unknow Core\Application->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:53:21  File:/var/Website/Socket/core/Application.php  Line:674  Message:Undefined property: Core\Application::$log
-#0 unknow Core\Application->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:54:17  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php (475)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(647)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ FetalError Start -----
-Error: Time:2018-03-26 14:54:23  File:/var/Website/Socket/core/Logs.php  Line:125  Message:Undefined index: Function
------ FetalError End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:54:23  File:/var/Website/Socket/core/Application.php  Line:676  Message:Undefined property: Core\Application::$log
-#0 unknow Core\Application->unknow(unknow)
------ Error End ------
-
------ FetalError Start -----
-Error: Time:2018-03-26 14:54:23  File:/var/Website/Socket/core/Logs.php  Line:125  Message:Undefined index: Function
------ FetalError End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:54:23  File:/var/Website/Socket/core/Application.php  Line:676  Message:Undefined property: Core\Application::$log
-#0 unknow Core\Application->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:55:12  File:/var/Website/Socket/core/Application.php  Line:475  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(475)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(647)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:55:14  File:/var/Website/Socket/core/Application.php  Line:676  Message:Undefined property: Core\Application::$log
-#0 unknow Core\Application->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:55:14  File:/var/Website/Socket/core/Application.php  Line:676  Message:Undefined property: Core\Application::$log
-#0 unknow Core\Application->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:56:16  File:/var/Website/Socket/core/Application.php  Line:626  Message:Undefined index: dir
-#0 /var/Website/Socket/core/Application.php Core\Application->unknow(641)
-#1 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:56:16  File:/var/Website/Socket/core/Logs.php  Line:91  Message:Undefined index: Function
-#0 /var/Website/Socket/core/Exception.php Core\Logs->unknow(28)
-#1 unknow Core\Exception->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:56:16  File:/var/Website/Socket/core/Logs.php  Line:91  Message:Undefined index: Function
-#0 /var/Website/Socket/core/Exception.php Core\Logs->unknow(28)
-#1 unknow Core\Exception->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:56:16  File:/var/Website/Socket/core/Logs.php  Line:91  Message:Undefined index: Function
-#0 /var/Website/Socket/core/Exception.php Core\Logs->unknow(28)
-#1 unknow Core\Exception->unknow(unknow)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 14:56:46  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:00:45  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:00:49  File:/var/Website/Socket/core/Application.php  Line:289  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(234)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(659)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:00:53  File:/var/Website/Socket/core/Application.php  Line:611  Message:Object of class EvSignal could not be converted to int
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(39)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(257)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(659)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:00:53  File:/var/Website/Socket/core/Application.php  Line:613  Message:Object of class EvSignal could not be converted to int
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(39)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(257)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(659)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:00:53  File:/var/Website/Socket/core/Application.php  Line:615  Message:Object of class EvSignal could not be converted to int
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(39)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(257)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(659)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:03:33  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:03:50  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:07:11  File:/var/Website/Socket/core/Application.php  Line:477  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(477)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(649)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:07:44  File:/var/Website/Socket/core/Application.php  Line:477  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(477)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(649)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:07:59  File:/var/Website/Socket/core/Application.php  Line:288  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(233)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(658)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:08:54  File:/var/Website/Socket/core/Application.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(479)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(651)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:09:18  File:/var/Website/Socket/core/Application.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(479)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(651)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:09:23  File:/var/Website/Socket/core/Application.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(479)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(651)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:09:55  File:/var/Website/Socket/core/Application.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(479)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(651)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:11:36  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(648)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:11:41  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(668)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(660)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:13:15  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:13:22  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:39:57  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:39:59  File:/var/Website/Socket/core/Application.php  Line:289  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(670)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(662)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:41:48  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:42:13  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:42:23  File:/var/Website/Socket/core/Application.php  Line:289  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(670)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(662)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:43:30  File:/var/Website/Socket/core/Application.php  Line:478  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(478)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(650)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:45:29  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(648)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:45:31  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(253)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(657)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:45:32  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(668)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(660)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:46:43  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php unknow(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->unknow(651)
-#2 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:49:11  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(671)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(663)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:49:11  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->unknow(unknow)
-#1 /var/Website/Socket/event/Ev.php unknow(31)
-#2 unknow Event\Ev::unknow(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::unknow(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::unknow(253)
-#5 /var/Website/Socket/core/Application.php Core\Application->unknow(660)
-#6 /var/Website/Socket/app.php Core\Application->unknow(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:49:20  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(651)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:50:19  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(648)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:51:15  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(648)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:51:16  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(668)
-#5 /var/Website/Socket/core/Application.php Core\Application->loop(660)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:52:48  File:/var/Website/Socket/core/Application.php  Line:476  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(476)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(648)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:52:49  File:/var/Website/Socket/core/Application.php  Line:287  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(668)
-#5 /var/Website/Socket/core/Application.php Core\Application->loop(660)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:53:33  File:/var/Website/Socket/core/Application.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(479)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(651)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:53:38  File:/var/Website/Socket/core/Application.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(479)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(651)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:53:38  File:/var/Website/Socket/core/Application.php  Line:519  Message:stream_socket_server(): unable to connect to tcp://0.0.0.0:9100 (Address already in use)
-#0 /var/Website/Socket/core/Application.php stream_socket_server(519)
-#1 /var/Website/Socket/core/Application.php Core\Application->listenServer(654)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:53:44  File:/var/Website/Socket/core/Application.php  Line:290  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(671)
-#5 /var/Website/Socket/core/Application.php Core\Application->loop(663)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:53:44  File:/var/Website/Socket/core/Application.php  Line:290  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(253)
-#5 /var/Website/Socket/core/Application.php Core\Application->fork(660)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:58:39  File:/var/Website/Socket/core/Application.php  Line:481  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(481)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(653)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:58:41  File:/var/Website/Socket/core/Application.php  Line:292  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(253)
-#5 /var/Website/Socket/core/Application.php Core\Application->fork(662)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 15:58:41  File:/var/Website/Socket/core/Application.php  Line:292  Message:Undefined index: 
-#0 unknow Core\Application->forwardForParent(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(31)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(44)
-#4 /var/Website/Socket/core/Application.php Event\Ev::loop(673)
-#5 /var/Website/Socket/core/Application.php Core\Application->loop(665)
-#6 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:00:37  File:/var/Website/Socket/core/Application.php  Line:484  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(484)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(656)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:00:42  File:/var/Website/Socket/core/Application.php  Line:484  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(484)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(656)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:00:46  File:/var/Website/Socket/core/Application.php  Line:484  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(484)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(656)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:00:46  File:/var/Website/Socket/core/Application.php  Line:524  Message:stream_socket_server(): unable to connect to tcp://0.0.0.0:9100 (Address already in use)
-#0 /var/Website/Socket/core/Application.php stream_socket_server(524)
-#1 /var/Website/Socket/core/Application.php Core\Application->listenServer(659)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:00:52  File:/var/Website/Socket/core/Application.php  Line:484  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(484)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(656)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:00:52  File:/var/Website/Socket/core/Application.php  Line:524  Message:stream_socket_server(): unable to connect to tcp://0.0.0.0:9100 (Address already in use)
-#0 /var/Website/Socket/core/Application.php stream_socket_server(524)
-#1 /var/Website/Socket/core/Application.php Core\Application->listenServer(659)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:10:08  File:/var/Website/Socket/core/Application.php  Line:489  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(489)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(666)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 16:10:12  File:/var/Website/Socket/protocol/WebSocket.php  Line:145  Message:Uninitialized string offset: 0
-#0 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::isPong(76)
-#1 /var/Website/Socket/core/Application.php Connection\WebSocketConnection->isPing(360)
-#2 unknow Core\Application->listenForClient(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(31)
+Error: Time:2018-03-27 14:51:21  File:/var/Website/Socket/core/Forward.php  Line:773  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(773)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(692)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
 #4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(44)
-#6 /var/Website/Socket/core/Application.php Event\Ev::loop(253)
-#7 /var/Website/Socket/core/Application.php Core\Application->fork(675)
-#8 /var/Website/Socket/app.php Core\Application->run(21)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(793)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(764)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:10:16  File:/var/Website/Socket/protocol/WebSocket.php  Line:145  Message:Uninitialized string offset: 0
-#0 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::isPong(76)
-#1 /var/Website/Socket/core/Application.php Connection\WebSocketConnection->isPing(360)
-#2 unknow Core\Application->listenForClient(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(31)
+Error: Time:2018-03-27 14:51:21  File:/var/Website/Socket/core/Forward.php  Line:773  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(773)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(694)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
 #4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(44)
-#6 /var/Website/Socket/core/Application.php Event\Ev::loop(253)
-#7 /var/Website/Socket/core/Application.php Core\Application->fork(675)
-#8 /var/Website/Socket/app.php Core\Application->run(21)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(793)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(764)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:14:22  File:/var/Website/Socket/protocol/WebSocket.php  Line:145  Message:Uninitialized string offset: 0
-#0 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::isPong(76)
-#1 /var/Website/Socket/core/Application.php Connection\WebSocketConnection->isPing(360)
-#2 unknow Core\Application->listenForClient(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(31)
+Error: Time:2018-03-27 14:52:42  File:/var/Website/Socket/core/Forward.php  Line:473  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(473)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(749)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 14:52:44  File:/var/Website/Socket/core/Forward.php  Line:775  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(775)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(692)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
 #4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(44)
-#6 /var/Website/Socket/core/Application.php Event\Ev::loop(253)
-#7 /var/Website/Socket/core/Application.php Core\Application->fork(675)
-#8 /var/Website/Socket/app.php Core\Application->run(21)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(795)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(764)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:14:28  File:/var/Website/Socket/protocol/WebSocket.php  Line:145  Message:Uninitialized string offset: 0
-#0 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::isPong(76)
-#1 /var/Website/Socket/core/Application.php Connection\WebSocketConnection->isPing(360)
-#2 unknow Core\Application->listenForClient(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(31)
+Error: Time:2018-03-27 14:52:44  File:/var/Website/Socket/core/Forward.php  Line:775  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(775)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(694)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
 #4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(44)
-#6 /var/Website/Socket/core/Application.php Event\Ev::loop(253)
-#7 /var/Website/Socket/core/Application.php Core\Application->fork(675)
-#8 /var/Website/Socket/app.php Core\Application->run(21)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(795)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(764)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:19:39  File:/var/Website/Socket/core/Application.php  Line:488  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(488)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(672)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
+Error: Time:2018-03-27 14:54:47  File:/var/Website/Socket/core/Forward.php  Line:473  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(473)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(751)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:19:39  File:/var/Website/Socket/core/Logs.php  Line:91  Message:Undefined index: Function
-#0 /var/Website/Socket/core/Exception.php Core\Logs->genExcepStr(28)
-#1 unknow Core\Exception->debug(unknow)
+Error: Time:2018-03-27 14:56:58  File:/var/Website/Socket/core/Forward.php  Line:473  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(473)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(752)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:19:39  File:/var/Website/Socket/core/Logs.php  Line:91  Message:Undefined index: Function
-#0 /var/Website/Socket/core/Exception.php Core\Logs->genExcepStr(28)
-#1 unknow Core\Exception->debug(unknow)
+Error: Time:2018-03-27 14:57:24  File:/var/Website/Socket/core/Forward.php  Line:473  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(473)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(752)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:20:24  File:/var/Website/Socket/core/Application.php  Line:488  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(488)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(672)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
+Error: Time:2018-03-27 14:59:59  File:/var/Website/Socket/core/Forward.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(479)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(758)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 16:20:50  File:/var/Website/Socket/core/Application.php  Line:488  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Application.php stream_socket_client(488)
-#1 /var/Website/Socket/core/Application.php Core\Application->connectRegister(672)
-#2 /var/Website/Socket/app.php Core\Application->run(21)
+Error: Time:2018-03-27 15:00:08  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 21:49:19  File:/var/Website/Socket/core/Forward.php  Line:453  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(453)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(707)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
+Error: Time:2018-03-27 15:00:10  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 21:49:28  File:/var/Website/Socket/core/Forward.php  Line:358  Message:stream_socket_accept() expects parameter 1 to be resource, object given
-#0 /var/Website/Socket/core/Forward.php stream_socket_accept(358)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
+Error: Time:2018-03-27 15:01:25  File:/var/Website/Socket/core/Forward.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(479)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(758)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:30  File:/var/Website/Socket/core/Forward.php  Line:784  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(784)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(804)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:39  File:/var/Website/Socket/core/Forward.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(479)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(758)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:42  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:42  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:43  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:43  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:43  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:44  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:44  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:44  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:44  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:45  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:45  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:02:45  File:/var/Website/Socket/core/Forward.php  Line:782  Message:Constant APP_END already defined
+#0 /var/Website/Socket/core/Forward.php define(782)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->exist(696)
+#2 unknow Core\Forward->signalHandle(unknow)
+#3 /var/Website/Socket/event/Ev.php call_user_func(75)
+#4 unknow Event\Ev::Event\{closure}(unknow)
+#5 /var/Website/Socket/event/Ev.php Ev::run(80)
+#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(802)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->loop(773)
+#8 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:03:53  File:/var/Website/Socket/core/Forward.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(479)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(758)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:04:53  File:/var/Website/Socket/core/Forward.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(479)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(758)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:06:25  File:/var/Website/Socket/core/Forward.php  Line:479  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(479)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(761)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:23:31  File:/var/Website/Socket/core/Forward.php  Line:488  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(488)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(778)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:24:29  File:/var/Website/Socket/core/Forward.php  Line:488  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(488)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(778)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:25:09  File:/var/Website/Socket/core/Forward.php  Line:488  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(488)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(778)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 15:30:48  File:/var/Website/Socket/core/Forward.php  Line:480  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(480)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(770)
+#2 /var/Website/Socket/app.php Core\Forward->run(87)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 16:37:48  File:/var/Website/Socket/core/Forward.php  Line:480  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
+#0 /var/Website/Socket/core/Forward.php stream_socket_client(480)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(770)
+#2 /var/Website/Socket/register.php Core\Forward->run(33)
+----- Error End ------
+
+----- Error Start -----
+Error: Time:2018-03-27 16:53:00  File:/var/Website/Socket/core/Register.php  Line:493  Message:stream_socket_accept(): accept failed: Connection timed out
+#0 /var/Website/Socket/core/Register.php stream_socket_accept(493)
+#1 unknow Core\Register->Core\{closure}(unknow)
+#2 /var/Website/Socket/event/Ev.php call_user_func(64)
 #3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
+#4 /var/Website/Socket/event/Ev.php Ev::run(80)
+#5 /var/Website/Socket/core/Register.php Event\Ev::loop(755)
+#6 /var/Website/Socket/core/Register.php Core\Register->loop(724)
+#7 /var/Website/Socket/register.php Core\Register->run(33)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 21:49:28  File:/var/Website/Socket/core/Forward.php  Line:361  Message:stream_set_blocking() expects parameter 1 to be resource, boolean given
-#0 /var/Website/Socket/core/Forward.php stream_set_blocking(361)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
+Error: Time:2018-03-27 17:05:30  File:/var/Website/Socket/core/Register.php  Line:491  Message:stream_socket_accept(): accept failed: Connection timed out
+#0 /var/Website/Socket/core/Register.php stream_socket_accept(491)
+#1 unknow Core\Register->Core\{closure}(unknow)
+#2 /var/Website/Socket/event/Ev.php call_user_func(64)
 #3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
+#4 /var/Website/Socket/event/Ev.php Ev::run(80)
+#5 /var/Website/Socket/core/Register.php Event\Ev::loop(772)
+#6 /var/Website/Socket/core/Register.php Core\Register->loop(741)
+#7 /var/Website/Socket/register.php Core\Register->run(33)
 ----- Error End ------
 
 ----- Error Start -----
-Error: Time:2018-03-26 21:49:40  File:/var/Website/Socket/core/Forward.php  Line:358  Message:stream_socket_accept() expects parameter 1 to be resource, object given
-#0 /var/Website/Socket/core/Forward.php stream_socket_accept(358)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
+Error: Time:2018-03-27 17:05:30  File:/var/Website/Socket/core/Register.php  Line:496  Message:stream_socket_get_name() expects parameter 1 to be resource, boolean given
+#0 /var/Website/Socket/core/Register.php stream_socket_get_name(496)
+#1 unknow Core\Register->Core\{closure}(unknow)
+#2 /var/Website/Socket/event/Ev.php call_user_func(64)
 #3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:40  File:/var/Website/Socket/core/Forward.php  Line:361  Message:stream_set_blocking() expects parameter 1 to be resource, boolean given
-#0 /var/Website/Socket/core/Forward.php stream_set_blocking(361)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:49:51  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:53:20  File:/var/Website/Socket/core/Forward.php  Line:453  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(453)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(707)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:54:28  File:/var/Website/Socket/core/Forward.php  Line:453  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(453)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(707)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:54:38  File:/var/Website/Socket/core/Forward.php  Line:358  Message:stream_socket_accept() expects parameter 1 to be resource, object given
-#0 /var/Website/Socket/core/Forward.php stream_socket_accept(358)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:54:38  File:/var/Website/Socket/core/Forward.php  Line:361  Message:stream_set_blocking() expects parameter 1 to be resource, boolean given
-#0 /var/Website/Socket/core/Forward.php stream_set_blocking(361)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:55:29  File:/var/Website/Socket/core/Forward.php  Line:453  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(453)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(707)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:55:49  File:/var/Website/Socket/core/Forward.php  Line:358  Message:stream_socket_accept() expects parameter 1 to be resource, object given
-#0 /var/Website/Socket/core/Forward.php stream_socket_accept(358)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:55:49  File:/var/Website/Socket/core/Forward.php  Line:361  Message:stream_set_blocking() expects parameter 1 to be resource, boolean given
-#0 /var/Website/Socket/core/Forward.php stream_set_blocking(361)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:07  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:09  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:09  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:56:09  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:58:40  File:/var/Website/Socket/core/Forward.php  Line:453  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(453)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(707)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:58:43  File:/var/Website/Socket/core/Forward.php  Line:358  Message:stream_socket_accept() expects parameter 1 to be resource, object given
-#0 /var/Website/Socket/core/Forward.php stream_socket_accept(358)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 21:58:43  File:/var/Website/Socket/core/Forward.php  Line:361  Message:stream_set_blocking() expects parameter 1 to be resource, boolean given
-#0 /var/Website/Socket/core/Forward.php stream_set_blocking(361)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Ev.php call_user_func(67)
-#3 unknow Event\Ev::Event\{closure}(unknow)
-#4 /var/Website/Socket/event/Ev.php Ev::run(83)
-#5 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(720)
-#7 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:00:55  File:/var/Website/Socket/core/Forward.php  Line:453  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(453)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(707)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:03:39  File:/var/Website/Socket/core/Forward.php  Line:661  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:03:39  File:/var/Website/Socket/core/Forward.php  Line:663  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:03:39  File:/var/Website/Socket/core/Forward.php  Line:665  Message:Object of class Event\EvCtrl\EvCtrl could not be converted to int
-#0 unknow Core\Forward->signalHandle(unknow)
-#1 /var/Website/Socket/event/Ev.php call_user_func(78)
-#2 unknow Event\Ev::Event\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php Ev::run(83)
-#4 /var/Website/Socket/core/Forward.php Event\Ev::loop(731)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(723)
-#6 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:04:42  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(709)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:04:54  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(709)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:04:54  File:/var/Website/Socket/core/Forward.php  Line:496  Message:stream_socket_server(): unable to connect to tcp://0.0.0.0:9100 (Address already in use)
-#0 /var/Website/Socket/core/Forward.php stream_socket_server(496)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->listenServer(712)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:06:55  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(709)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:09:12  File:/var/Website/Socket/core/Forward.php  Line:454  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(454)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(708)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:09:51  File:/var/Website/Socket/core/Forward.php  Line:454  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(454)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(708)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:11:19  File:/var/Website/Socket/core/Forward.php  Line:452  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(452)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(706)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:12:36  File:/var/Website/Socket/core/Forward.php  Line:450  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(450)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(704)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:15:42  File:/var/Website/Socket/core/Forward.php  Line:448  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(448)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:22:46  File:/var/Website/Socket/core/Forward.php  Line:448  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(448)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(695)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:23:32  File:/var/Website/Socket/core/Forward.php  Line:448  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(448)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(695)
-#2 /var/Website/Socket/app.php Core\Forward->run(21)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:25:54  File:/var/Website/Socket/core/Forward.php  Line:448  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(448)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(695)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:25:57  File:/var/Website/Socket/protocol/WebSocket.php  Line:145  Message:Uninitialized string offset: 0
-#0 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::isPing(76)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->isPing(393)
-#2 unknow Core\Forward->listenForClient(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(64)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(708)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:26:27  File:/var/Website/Socket/protocol/WebSocket.php  Line:145  Message:Uninitialized string offset: 0
-#0 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::isPing(76)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->isPing(393)
-#2 unknow Core\Forward->listenForClient(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(64)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(708)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:29:24  File:/var/Website/Socket/core/Forward.php  Line:450  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(450)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(697)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:30:51  File:/var/Website/Socket/core/Forward.php  Line:454  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(454)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(701)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:33:08  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:36:13  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:38:56  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:39:23  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:41:36  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:42:50  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:47:03  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:01  File:/var/Website/Socket/core/Forward.php  Line:455  Message:stream_socket_client(): unable to connect to tcp://0.0.0.0:9102 (Connection refused)
-#0 /var/Website/Socket/core/Forward.php stream_socket_client(455)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->connectRegister(702)
-#2 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:17  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:19  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:21  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:23  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:25  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:27  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:29  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:31  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:33  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:35  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:37  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:39  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
------ Error End ------
-
------ Error Start -----
-Error: Time:2018-03-26 22:48:41  File:/var/Website/Socket/connection/WebSocketConnection.php  Line:64  Message:fwrite(): send of 2 bytes failed with errno=32 Broken pipe
-#0 /var/Website/Socket/connection/WebSocketConnection.php fwrite(64)
-#1 /var/Website/Socket/core/Forward.php Connection\WebSocketConnection->ping(380)
-#2 unknow Core\Forward->Core\{closure}(unknow)
-#3 /var/Website/Socket/event/Ev.php call_user_func(40)
-#4 unknow Event\Ev::Event\{closure}(unknow)
-#5 /var/Website/Socket/event/Ev.php Ev::run(80)
-#6 /var/Website/Socket/core/Forward.php Event\Ev::loop(246)
-#7 /var/Website/Socket/core/Forward.php Core\Forward->fork(715)
-#8 /var/Website/Socket/app.php Core\Forward->run(18)
+#4 /var/Website/Socket/event/Ev.php Ev::run(80)
+#5 /var/Website/Socket/core/Register.php Event\Ev::loop(772)
+#6 /var/Website/Socket/core/Register.php Core\Register->loop(741)
+#7 /var/Website/Socket/register.php Core\Register->run(33)
 ----- Error End ------
 

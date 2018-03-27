@@ -12,8 +12,6 @@ namespace Core;
 
 use Connection\Connection;
 use Connection\TcpConnection;
-use Connection\UdpConnection;
-use Connection\WebSocketConnection;
 use Event\Event;
 use Event\Ev;
 use Event\Select;
@@ -34,9 +32,6 @@ class Forward {
 
     // backlog
     protected $_backlog = 10000;
-
-    // 受支持的协议
-    public $protocolRange = ['tcp' , 'udp' , 'websocket'];
 
     // 启动前要做的事情
     public $before = null;
@@ -78,7 +73,7 @@ class Forward {
     // 配置文件
     protected $_sysConfig = [];
 
-    // 与其他服务器交流格式（支持 Worker 模式）
+    // 与其他服务器交流格式
     protected $_formatForOtherServer = [
         // 发送方机器表示码
         'from_machine'  => '' ,
@@ -99,22 +94,8 @@ class Forward {
 
     // 绑定的事件
     protected $_events = [
-        // 主进程连接协调进程成功时回调
-        'registerSuccess'   => null ,
-        // 主进程连接协调进程失败时回调
-        'registerFailed'    => null ,
-        // 主进程创建对其他服务器链接的监听 socket 成功时回调
-        'parentListenSuccess' => null ,
-        // 主进程收到消息时回调(可以是其他服务器发送过来的,也可以是子进程发送的)
-        'getForParent' => null ,
-        // 子进程接收到消息时回调(可以是父进程发送的,也可以是客户端发送的)
-        'getForChild' => null ,
-        // 客户端链接成功时回调
-        'open' => null ,
         // 收到客户端消息时回调
         'message' => null ,
-        // 客户端断开时回调
-        'close' => null
     ];
 
     // 日志处理
@@ -369,23 +350,6 @@ class Forward {
         $event::addIo($server , Event::READ , [$this , 'accept']);
     }
 
-    // 产生 worker 链接
-    public function genWorker(){
-        $config  = $this->config("forward.server.worker");
-        $address = gen_address($config);
-
-        $conn = stream_socket_client($address , $errno , $errstr);
-
-        if (!$conn) {
-            throw new \Exception('产生 worker 链接失败');
-        }
-
-        $connection = $this->connection('tcp');
-        $connection = new $connection($conn);
-
-        return $connection;
-    }
-
     // 监听客户端链接
     public function accept($ctrl , $server){
         // 产生客户端连接
@@ -404,22 +368,12 @@ class Forward {
         $connection = $this->connection($child['protocol']);
         $connection = new $connection($client , $cid);
 
-        // worker 进程
-        if ($this->config('forward.enable_worker')) {
-            $worker = $this->genWorker();
-        } else {
-            $worker = null;
-        }
-
         // 创建客户端链接实例
         $this->connectionsForClient[$cid] = $connection;
 
         $event = $this->event;
 
-        $event::addIo($client , Event::READ , [$this , 'listenForClient'] , [
-            'from' => $connection ,
-            'worker' => $worker
-        ]);
+        $event::addIo($client , Event::READ , [$this , 'listenForClient'] , $connection);
 
         if (is_callable($this->_events['open'])) {
             call_user_func($this->_events['open']->bindTo($connection , null));
@@ -427,10 +381,8 @@ class Forward {
     }
 
     // 监听客户端数据
-    public function listenForClient($ctrl , $socket , $args){
-        $from   = $args['from'];
-        $worker = $args['worker'];
-        $msg    = $from->get();
+    public function listenForClient($ctrl , $socket , Connection $from){
+        $msg = $from->get();
 
         if (is_null($msg)) {
             return ;
@@ -461,12 +413,7 @@ class Forward {
         }
 
         if (is_callable($this->_events['message'])) {
-            if (is_null($worker)) {
-                call_user_func($this->_events['message']->bindTo($from , null) , $msg);
-            } else {
-                // 启用了 worker 的话，你只要按照发送规定的格式发送消息给 worker 进程就好
-                call_user_func($this->_events['message']->bindTo($from , null) , $msg , $worker);
-            }
+            call_user_func($this->_events['message']->bindTo($from , null) , $msg);
         } else {
             echo "接收到客户端数据:{$msg}\n";
         }
@@ -807,10 +754,8 @@ class Forward {
         // 产生子进程
         $this->fork();
 
-        if ($this->config('forward.enable_register')) {
-            // 产生与协调进程间的通信通道(可选)
-            $this->connectRegister();
-        }
+        // 产生与协调进程间的通信通道(可选)
+        $this->connectRegister();
 
         // 监听来自其他服务器的通信通道(可选)
         $this->listenServer();

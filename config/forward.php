@@ -5,6 +5,12 @@
  */
 
 return [
+    // 是否启用 Register
+    'enable_register' => true ,
+
+    // 是否启用 worker
+    'enable_worker' => true ,
+
     // 当前自身监听地址
     'listen' => [
         // 主进程监听的地址
@@ -38,7 +44,8 @@ return [
 
         // 业务处理服务器:通信地址
         // 通常是代理服务器的通信地址(因为要做负载均衡)
-        'business' => [
+        // 通信协议必须是 tcp 协议
+        'worker' => [
             'protocol'  => 'tcp' ,
             'ip'        => '0.0.0.0' ,
             'port'      => 9103

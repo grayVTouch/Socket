@@ -21,7 +21,7 @@ class EvCtrl implements EventCtrl
     }
 
     // 停止
-    public function stop(){
+    public function delete(){
         // 停止事件
         $this->watcher->stop();
 

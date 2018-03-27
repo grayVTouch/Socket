@@ -18,7 +18,7 @@ class SelectCtrl implements EventCtrl
         $this->id = $id;
     }
 
-    public function stop(){
+    public function delete(){
         Select::delete($this->id);
     }
 }

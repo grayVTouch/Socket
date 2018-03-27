@@ -12,5 +12,5 @@ namespace event\EvCtrl;
 interface EventCtrl
 {
     // 关闭事件
-    public function stop();
+    public function delete();
 }

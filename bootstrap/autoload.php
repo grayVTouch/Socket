@@ -25,6 +25,7 @@ $autoload->register([
         CORE_DIR . 'Function/base.php' ,
         CORE_DIR . 'Function/file.php' ,
         CORE_DIR . 'Function/url.php' ,
+        CORE_DIR . 'Function/time.php' ,
 
         // 系统必须函数
         CORE_DIR . 'Common/currency.php' ,

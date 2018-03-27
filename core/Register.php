@@ -12,14 +12,16 @@ namespace Core;
 
 use Connection\Connection;
 use Connection\TcpConnection;
-use Connection\UdpConnection;
 use Connection\WebSocketConnection;
 use Event\Event;
 use Event\Ev;
 use Event\Select;
 use Core\Lib\File;
 
-class Forward {
+class Register {
+    // 链接数量
+    public $count = 0;
+
     // 错误
     public $error = null;
 
@@ -34,9 +36,6 @@ class Forward {
 
     // backlog
     protected $_backlog = 10000;
-
-    // 受支持的协议
-    public $protocolRange = ['tcp' , 'udp' , 'websocket'];
 
     // 启动前要做的事情
     public $before = null;
@@ -78,14 +77,10 @@ class Forward {
     // 配置文件
     protected $_sysConfig = [];
 
-    // 与其他服务器交流格式（支持 Worker 模式）
+    // 与其他服务器交流格式
     protected $_formatForOtherServer = [
         // 发送方机器表示码
         'from_machine'  => '' ,
-        // 发送给那台服务器
-        'to_machine'    => '' ,
-        // 那台服务器的地址
-        'to_address'    => '' ,
         // 想要通信的子进程
         'to_pid'        => '' ,
         // 想要通信的子进程下的客户端id
@@ -99,12 +94,10 @@ class Forward {
 
     // 绑定的事件
     protected $_events = [
-        // 主进程连接协调进程成功时回调
-        'registerSuccess'   => null ,
-        // 主进程连接协调进程失败时回调
-        'registerFailed'    => null ,
-        // 主进程创建对其他服务器链接的监听 socket 成功时回调
-        'parentListenSuccess' => null ,
+        // 主进程接受到其他服务器链接时
+        'serverOpen'   => null ,
+        // 主进程接收到其他服务器的消息时
+        'serverMessage'    => null ,
         // 主进程收到消息时回调(可以是其他服务器发送过来的,也可以是子进程发送的)
         'getForParent' => null ,
         // 子进程接收到消息时回调(可以是父进程发送的,也可以是客户端发送的)
@@ -136,7 +129,7 @@ class Forward {
     // 事件名称
     public function getEvent(){
         if (extension_loaded('ev')) {
-            return Ev::class;
+            // return Ev::class;
         }
 
         return Select::class;
@@ -166,7 +159,7 @@ class Forward {
     public function fork(){
         $event = $this->event;
 
-        $config = $this->config('forward.listen.child');
+        $config = $this->config('register.listen.child');
 
         for ($i = 0; $i < $config['count']; ++$i)
         {
@@ -244,7 +237,7 @@ class Forward {
     // 子进程心跳检查
     public function heartCheckForChild(){
         $event  = $this->event;
-        $client = $this->config('forward.client');
+        $client = $this->config('register.client');
 
         // 定时循环事件
         $event::addLoopTimer($client['heart_time'] , true , function($ctrl){
@@ -275,25 +268,22 @@ class Forward {
      */
     public function getForChild($ctrl , $socket , Connection $from){
         $msg    = $from->get();
-        $data   = json_decode($msg , true);
+
+        var_dump($msg);
 
         if (empty($msg)) {
             return ;
         }
 
-        if (empty($data['cid'])) {
-            if (is_callable($this->_events['getForChild'])) {
-                call_user_func($this->_events['getForChild']->bindTo($from , null));
-            } else {
-                echo "接收到来自父进程的消息:{$data['msg']}\n";
-            }
+        foreach ($this->connectionsForClient as $v)
+        {
+            $v->send($msg);
+        }
+
+        if (is_callable($this->_events['getForChild'])) {
+            call_user_func($this->_events['getForChild']->bindTo($from , null));
         } else {
-            // print_r(array_keys($this->connectionsForClient));
-
-            $to = $this->connectionsForClient[$data['cid']];
-
-            // 发送数据
-            $to->send($data['msg']);
+            echo "接收到来自父进程的消息:{$msg}\n";
         }
     }
 
@@ -369,23 +359,6 @@ class Forward {
         $event::addIo($server , Event::READ , [$this , 'accept']);
     }
 
-    // 产生 worker 链接
-    public function genWorker(){
-        $config  = $this->config("forward.server.worker");
-        $address = gen_address($config);
-
-        $conn = stream_socket_client($address , $errno , $errstr);
-
-        if (!$conn) {
-            throw new \Exception('产生 worker 链接失败');
-        }
-
-        $connection = $this->connection('tcp');
-        $connection = new $connection($conn);
-
-        return $connection;
-    }
-
     // 监听客户端链接
     public function accept($ctrl , $server){
         // 产生客户端连接
@@ -398,28 +371,18 @@ class Forward {
         $cid = $this->genCode();
 
         // 配置文件
-        $child = $this->config('forward.listen.child');
+        $child = $this->config('register.listen.child');
 
         // 获取协议
         $connection = $this->connection($child['protocol']);
         $connection = new $connection($client , $cid);
-
-        // worker 进程
-        if ($this->config('forward.enable_worker')) {
-            $worker = $this->genWorker();
-        } else {
-            $worker = null;
-        }
 
         // 创建客户端链接实例
         $this->connectionsForClient[$cid] = $connection;
 
         $event = $this->event;
 
-        $event::addIo($client , Event::READ , [$this , 'listenForClient'] , [
-            'from' => $connection ,
-            'worker' => $worker
-        ]);
+        $event::addIo($client , Event::READ , [$this , 'listenForClient'] , $connection);
 
         if (is_callable($this->_events['open'])) {
             call_user_func($this->_events['open']->bindTo($connection , null));
@@ -427,10 +390,8 @@ class Forward {
     }
 
     // 监听客户端数据
-    public function listenForClient($ctrl , $socket , $args){
-        $from   = $args['from'];
-        $worker = $args['worker'];
-        $msg    = $from->get();
+    public function listenForClient($ctrl , $socket , Connection $from){
+        $msg = $from->get();
 
         if (is_null($msg)) {
             return ;
@@ -461,12 +422,7 @@ class Forward {
         }
 
         if (is_callable($this->_events['message'])) {
-            if (is_null($worker)) {
-                call_user_func($this->_events['message']->bindTo($from , null) , $msg);
-            } else {
-                // 启用了 worker 的话，你只要按照发送规定的格式发送消息给 worker 进程就好
-                call_user_func($this->_events['message']->bindTo($from , null) , $msg , $worker);
-            }
+            call_user_func($this->_events['message']->bindTo($from , null) , $msg);
         } else {
             echo "接收到客户端数据:{$msg}\n";
         }
@@ -485,7 +441,7 @@ class Forward {
         ]);
 
         // 配置文件
-        $config = $this->config('forward.listen.child');
+        $config = $this->config('register.listen.child');
 
         if ($config['protocol'] === 'udp') {
             $address    = "{$config['protocol']}:{$config['ip']}:{$config['port']}";
@@ -509,52 +465,9 @@ class Forward {
         return random(256 , 'mixed' , true);
     }
 
-    // 链接协调进程
-    public function connectRegister(){
-        // 注册服务器配置文件
-        $config  = $this->config('forward.server.register');
-        $address = gen_address($config);
-
-        $socket = stream_socket_client($address , $errno , $errstr);
-
-        if (!$socket) {
-            // 说明并没有设置协调服务器
-            if (is_callable($this->_events['registerFailed'])) {
-                call_user_func($this->_events['registerFailed'] , $errno , $errstr);
-            }
-
-            return ;
-        }
-
-        $connection = $this->connection('tcp');
-        $connection = new $connection($socket);
-
-        $event = $this->event;
-
-        $event::addIo($socket , Event::READ , function() use($connection){
-            $msg = $connection->get();
-
-            if (empty($msg)) {
-                return ;
-            }
-
-            if ($connection->isPing($msg)) {
-                // 响应
-                $connection->pong();
-            }
-        });
-
-        // 可能需要发送监听端口的信息
-        // 如果不需要,则无需理会 ....
-
-        if (is_callable($this->_events['registerSuccess'])) {
-            call_user_func($this->_events['registerSuccess'] , $connection);
-        }
-    }
-
     // 监听来自其他服务器的通信通道
     public function listenServer(){
-        $config     = $this->config('forward.listen.parent');
+        $config     = $this->config('register.listen.parent');
         $address    = gen_address($config);
 
         $context = stream_context_create([
@@ -571,8 +484,7 @@ class Forward {
         $server = stream_socket_server($address , $errno , $errstr , STREAM_SERVER_BIND | STREAM_SERVER_LISTEN , $context);
 
         if (!$server) {
-            // 如果创建失败,表示未进行分布式部署
-            return ;
+            throw new \Exception('父进程产生 socket 服务端失败');
         }
 
         $event = $this->event;
@@ -580,10 +492,31 @@ class Forward {
         $event::addIo($server , Event::READ , function($ctrl , $socket) use($event){
             $client = stream_socket_accept($socket);
 
+            $this->count++;
+
+            // 远程服务器地址
+            $address = stream_socket_get_name($client , true);
+
             $connection = $this->connection('tcp');
             $connection = new $connection($client);
 
-            $event::addIo($client , Event::READ , function($ctrl , $socket) use($connection){
+            // 将有新服务器上线的消息扩散给所有的客户端链接
+            // 向子进程发送消息
+            $send = [
+                'address' => $address ,
+                'count' => $this->count ,
+            ];
+
+            $send = json_encode($send);
+
+            // print_r($this->connectionsForChild);
+
+            foreach ($this->connectionsForChild as $v)
+            {
+                $v->send($send);
+            }
+
+            $event::addIo($client , Event::READ , function($ctrl , $socket) use($connection , $address){
                 $msg = $connection->get();
 
                 if (empty($msg)) {
@@ -599,29 +532,21 @@ class Forward {
                 $data = json_decode($msg , true);
 
                 // 产生的客户端
-                if (!isset($this->connectionsForOtherServer[$data['from_machine']])) {
+                if (!isset($this->connectionsForOtherServer[$data['machine']])) {
                     // 第一次通信进保存链接
-                    $this->connectionsForOtherServer[$data['from_machine']] = $connection;
+                    $this->connectionsForOtherServer[$data['machine']] = $connection;
                 } else {
-                    // 要求进行消息转发
-                    if (empty($data['to_pid'])) {
-                        echo "其他服务器主进程发送当前服务器主进程的消息:{$data['to_msg']}\n";
+                    if (is_callable($this->_events['serverMessage'])) {
+                        call_user_func($this->_events['serverMessage']->bindTo($connection) , $data['msg']);
                     } else {
-                        // 找到对应的子进程通信链接
-                        $to = $this->connectionsForChild[$data['to_pid']];
-
-                        $send = [
-                            'cid' => $data['to_cid'] ,
-                            'msg' => $data['to_msg']
-                        ];
-
-                        $send = json_encode($send);
-
-                        // 转发消息
-                        $to->send($send);
+                        echo "接受到其他服务器发给主进程的消息：{$data['msg']}\n";
                     }
                 }
             });
+
+            if (is_callable($this->_events['serverOpen'])) {
+                call_user_func($this->_events['serverOpen']);
+            }
         });
     }
 
@@ -807,12 +732,7 @@ class Forward {
         // 产生子进程
         $this->fork();
 
-        if ($this->config('forward.enable_register')) {
-            // 产生与协调进程间的通信通道(可选)
-            $this->connectRegister();
-        }
-
-        // 监听来自其他服务器的通信通道(可选)
+        // 监听其他服务器链接
         $this->listenServer();
 
         // 安装信号

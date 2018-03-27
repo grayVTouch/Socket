@@ -1,33 +1,42 @@
-pid: 30812 startTime: 2018-03-26 16:19:39 endTime: 2018-03-26 16:19:39 duration: 0
-pid: 30832 startTime: 2018-03-26 16:20:24 endTime: 2018-03-26 16:20:24 duration: 0
-pid: 30845 startTime: 2018-03-26 16:20:50 endTime: 2018-03-26 16:21:00 duration: 10
-pid: 30844 startTime: 2018-03-26 16:20:50 endTime: 2018-03-26 16:21:00 duration: 10
-pid: 30843 startTime: 2018-03-26 16:20:50 endTime: 2018-03-26 16:21:00 duration: 10
-pid: 30846 startTime: 2018-03-26 16:20:50 endTime: 2018-03-26 16:21:00 duration: 10
-pid: 30842 startTime: 2018-03-26 16:20:50 endTime: 2018-03-26 16:21:00 duration: 10
-pid: 35877 startTime: 2018-03-26 22:04:42 endTime: 2018-03-26 22:04:49 duration: 7
-pid: 35884 startTime: 2018-03-26 22:04:54 endTime: 2018-03-26 22:04:58 duration: 4
-pid: 35883 startTime: 2018-03-26 22:04:54 endTime: 2018-03-26 22:04:58 duration: 4
-pid: 35926 startTime: 2018-03-26 22:06:55 endTime: 2018-03-26 22:07:06 duration: 11
-pid: 36004 startTime: 2018-03-26 22:09:51 endTime: 2018-03-26 22:09:59 duration: 8
-pid: 36046 startTime: 2018-03-26 22:11:19 endTime: 2018-03-26 22:12:25 duration: 66
-pid: 36045 startTime: 2018-03-26 22:11:19 endTime: 2018-03-26 22:12:25 duration: 66
-pid: 36074 startTime: 2018-03-26 22:12:36 endTime: 2018-03-26 22:15:40 duration: 184
-pid: 36073 startTime: 2018-03-26 22:12:36 endTime: 2018-03-26 22:15:40 duration: 184
-pid: 36127 startTime: 2018-03-26 22:15:42 endTime: 2018-03-26 22:21:02 duration: 320
-pid: 36126 startTime: 2018-03-26 22:15:42 endTime: 2018-03-26 22:21:02 duration: 320
-pid: 36290 startTime: 2018-03-26 22:22:46 endTime: 2018-03-26 22:22:46 duration: 0
-pid: 36380 startTime: 2018-03-26 22:25:54 endTime: 2018-03-26 22:26:57 duration: 63
-pid: 36379 startTime: 2018-03-26 22:25:54 endTime: 2018-03-26 22:26:57 duration: 63
-pid: 36466 startTime: 2018-03-26 22:29:24 endTime: 2018-03-26 22:30:45 duration: 81
-pid: 36465 startTime: 2018-03-26 22:29:24 endTime: 2018-03-26 22:30:45 duration: 81
-pid: 36509 startTime: 2018-03-26 22:30:51 endTime: 2018-03-26 22:33:05 duration: 134
-pid: 36508 startTime: 2018-03-26 22:30:51 endTime: 2018-03-26 22:33:05 duration: 134
-pid: 36557 startTime: 2018-03-26 22:33:08 endTime: 2018-03-26 22:35:58 duration: 170
-pid: 36556 startTime: 2018-03-26 22:33:08 endTime: 2018-03-26 22:35:58 duration: 170
-pid: 36619 startTime: 2018-03-26 22:36:13 endTime: 2018-03-26 22:36:52 duration: 39
-pid: 36618 startTime: 2018-03-26 22:36:13 endTime: 2018-03-26 22:36:52 duration: 39
-pid: 36698 startTime: 2018-03-26 22:39:23 endTime: 2018-03-26 22:39:42 duration: 19
-pid: 36871 startTime: 2018-03-26 22:47:03 endTime: 2018-03-26 22:47:32 duration: 29
-pid: 36870 startTime: 2018-03-26 22:47:03 endTime: 2018-03-26 22:47:32 duration: 29
-pid: 36898 startTime: 2018-03-26 22:48:01 endTime: 2018-03-26 22:48:29 duration: 28
+pid: 11420 startTime: 2018-03-27 14:51:18 endTime: 2018-03-27 14:51:21 duration: 3s format: 0天0时0分3秒
+pid: 11420 startTime: 2018-03-27 14:51:18 endTime: 2018-03-27 14:51:21 duration: 3s format: 0天0时0分3秒
+pid: 11420 startTime: 2018-03-27 14:51:18 endTime: 2018-03-27 14:51:21 duration: 3s format: 0天0时0分3秒
+pid: 11464 startTime: 2018-03-27 14:52:42 endTime: 2018-03-27 14:52:44 duration: 2s format: 0天0时0分2秒
+pid: 11464 startTime: 2018-03-27 14:52:42 endTime: 2018-03-27 14:52:44 duration: 2s format: 0天0时0分2秒
+pid: 11464 startTime: 2018-03-27 14:52:42 endTime: 2018-03-27 14:52:44 duration: 2s format: 0天0时0分2秒
+pid: 11551 startTime: 2018-03-27 14:56:58 endTime: 2018-03-27 14:56:59 duration: 1s format: 0天0时0分1秒
+pid: 11576 startTime: 2018-03-27 14:57:24 endTime: 2018-03-27 14:57:26 duration: 2s format: 0天0时0分2秒
+pid: 11644 startTime: 2018-03-27 14:59:59 endTime: 2018-03-27 15:00:00 duration: 1s format: 0天0时0分1秒
+pid: 11644 startTime: 2018-03-27 14:59:59 endTime: 2018-03-27 15:00:00 duration: 1s format: 0天0时0分1秒
+pid: 11644 startTime: 2018-03-27 14:59:59 endTime: 2018-03-27 15:00:00 duration: 1s format: 0天0时0分1秒
+pid: 11686 startTime: 2018-03-27 15:01:25 endTime: 2018-03-27 15:01:27 duration: 2s format: 0天0时0分2秒
+pid: 11686 startTime: 2018-03-27 15:01:25 endTime: 2018-03-27 15:01:27 duration: 2s format: 0天0时0分2秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11741 startTime: 2018-03-27 15:02:39 endTime: 2018-03-27 15:02:40 duration: 1s format: 0天0时0分1秒
+pid: 11777 startTime: 2018-03-27 15:03:53 endTime: 2018-03-27 15:04:04 duration: 11s format: 0天0时0分11秒
+pid: 11817 startTime: 2018-03-27 15:04:53 endTime: 2018-03-27 15:05:05 duration: 12s format: 0天0时0分12秒
+pid: 11858 startTime: 2018-03-27 15:06:25 endTime: 2018-03-27 15:06:26 duration: 1s format: 0天0时0分1秒
+pid: 12086 startTime: 2018-03-27 15:23:31 endTime: 2018-03-27 15:23:57 duration: 26s format: 0天0时0分26秒
+pid: 12114 startTime: 2018-03-27 15:24:29 endTime: 2018-03-27 15:25:05 duration: 36s format: 0天0时0分36秒
+pid: 12133 startTime: 2018-03-27 15:25:09 endTime: 2018-03-27 15:26:24 duration: 75s format: 0天0时1分15秒
+pid: 12260 startTime: 2018-03-27 15:30:48 endTime: 2018-03-27 15:30:50 duration: 2s format: 0天0时0分2秒
+pid: 13172 startTime: 2018-03-27 16:37:48 endTime: 2018-03-27 16:38:15 duration: 27s format: 0天0时0分27秒
+pid: 13326 startTime: 2018-03-27 16:45:17 endTime: 2018-03-27 16:46:03 duration: 46s format: 0天0时0分46秒
+pid: 13349 startTime: 2018-03-27 16:46:13 endTime: 2018-03-27 16:47:08 duration: 55s format: 0天0时0分55秒
+pid: 13376 startTime: 2018-03-27 16:47:24 endTime: 2018-03-27 16:49:18 duration: 114s format: 0天0时1分54秒
+pid: 14052 startTime: 2018-03-27 17:06:15 endTime: 2018-03-27 17:07:49 duration: 94s format: 0天0时1分34秒
+pid: 14091 startTime: 2018-03-27 17:07:58 endTime: 2018-03-27 17:09:40 duration: 102s format: 0天0时1分42秒
+pid: 14134 startTime: 2018-03-27 17:09:44 endTime: 2018-03-27 17:10:43 duration: 59s format: 0天0时0分59秒
+pid: 14161 startTime: 2018-03-27 17:10:46 endTime: 2018-03-27 17:14:26 duration: 220s format: 0天0时3分40秒
+pid: 14301 startTime: 2018-03-27 17:17:01 endTime: 2018-03-27 17:18:15 duration: 74s format: 0天0时1分14秒

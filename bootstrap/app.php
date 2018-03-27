@@ -1,5 +1,10 @@
 <?php
 
+// 设置错误报告
+ini_set('display_errors' , 'On');
+// 设置报告等级
+error_reporting(E_ALL);
+
 // 程序开始
 define('APP_START' , time());
 
@@ -11,6 +16,7 @@ const CONNECTION_DIR    = ROOT_DIR . 'connection/';
 const EVENT_DIR         = ROOT_DIR . 'event/';
 const CORE_DIR          = ROOT_DIR . 'core/';
 const LOG_DIR           = ROOT_DIR . 'log/';
+const RUN_DIR           = ROOT_DIR . 'run/';
 const PROTOCOL_DIR      = ROOT_DIR . 'protocol/';
 
 // 设置调试模式
@@ -25,5 +31,13 @@ use Core\Register;
 // 业务处理内核
 use Core\Worker;
 
-// 初始化实例
-$app = new Forward();
+if (PROCESS_TYPE == 'register') {
+    // 初始化实例
+    $app = new Register();
+} else if (PROCESS_TYPE == 'forward') {
+    $app = new Forward();
+} else if (PROCESS_TYPE == 'worker') {
+    $app = new Worker();
+} else {
+    throw new Exception("不支持的进程类型");
+}

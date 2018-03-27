@@ -17,12 +17,20 @@ class WebSocketConnection implements Connection
     // 判断是否握手
     protected $_shakeHand = false;
 
-    function __construct($connection) {
+    // 判断链接是否关闭
+    public $closed = false;
+
+    // 客户端链接 id
+    public $id = null;
+
+
+    function __construct($connection , $id = '') {
         if (!is_resource($connection)) {
             throw new \Exception("不是 socket 客户端链接");
         }
 
         $this->_connection = $connection;
+        $this->id = $id;
     }
 
     // 发送数据
@@ -44,6 +52,10 @@ class WebSocketConnection implements Connection
         if (!$this->_shakeHand) {
             $this->send($encode);
             return ;
+        }
+
+        if ($this->isPing($encode) || $this->isPong($encode) || $this->isClose($encode)) {
+            return $encode;
         }
 
         $decode = WebSocket::decode($encode);
@@ -78,5 +90,9 @@ class WebSocketConnection implements Connection
 
     public function isPong(string $data = ''){
         return WebSocket::isPong($data);
+    }
+
+    public function isClose(string $data = ''){
+        return WebSocket::isClose($data);
     }
 }

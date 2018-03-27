@@ -15,12 +15,19 @@ trait TraitConnection {
 
     protected $_pong = 'pong:keepalive';
 
-    function __construct($connection){
+    // 表示链接是否还在使用
+    public $closed = false;
+
+    // 客户端链接id
+    public $id = null;
+
+    function __construct($connection , $id = ''){
         if (!is_resource($connection)) {
             throw new \Exception("不是 socket 客户端链接");
         }
 
         $this->_connection = $connection;
+        $this->id = $id;
     }
 
     // 写入数据

@@ -9,10 +9,26 @@
 namespace Core;
 
 
-class Exception
+class Exception extends Logs
 {
-    // socket 创建异常处理
-    public function handle(int $errno = 0 , string $errstr = ''){
-        exit("错误代码: {$errno},错误描述: {$errstr}\n");
+    function __construct(){
+        // 构造函数
+        parent::__construct(config('log.log_dir') , 'exception' , config('log.is_send_email'));
+    }
+
+    // 非调试模式（记录日志）
+    public function nodebug($excep){
+        $msg = $this->genExcepStr($excep);
+
+        $this->log($msg);
+    }
+
+    // 调试模式（直接输出）
+    public function debug($excep){
+        $log = $this->genExcepStr($excep);
+
+        $this->log($log);
+
+        exit($log);
     }
 }

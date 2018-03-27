@@ -1,15 +1,15 @@
 <?php
 
 // 程序开始
-define('APP_START' , microtime(true));
+define('APP_START' , time());
 
 // 定义系统目录
 const ROOT_DIR          = __DIR__ . '/../';
 const BOOTSTRAP_DIR     = ROOT_DIR . 'bootstrap/';
+const CONFIG_DIR        = ROOT_DIR . 'config/';
 const CONNECTION_DIR    = ROOT_DIR . 'connection/';
 const EVENT_DIR         = ROOT_DIR . 'event/';
 const CORE_DIR          = ROOT_DIR . 'core/';
-const FUNCTION_DIR      = ROOT_DIR . 'function/';
 const LOG_DIR           = ROOT_DIR . 'log/';
 const PROTOCOL_DIR      = ROOT_DIR . 'protocol/';
 
@@ -18,9 +18,12 @@ const PROTOCOL_DIR      = ROOT_DIR . 'protocol/';
 
 require_once BOOTSTRAP_DIR . 'autoload.php';
 
-use Core\Application;
+// 转发进程内核
+use Core\Forward;
+// 协调进程内核
+use Core\Register;
+// 业务处理内核
+use Core\Worker;
 
-$app = new Application();
-
-// 程序结束
-define('APP_END' , microtime(true));
+// 初始化实例
+$app = new Forward();

@@ -8,8 +8,8 @@
 
 require_once './event/Event.php';
 require_once './event/Select.php';
-require_once './function/url.php';
-require_once './function/array.php';
+require_once './Function/url.php';
+require_once './Function/array.php';
 require_once './protocol/WebSocket.php';
 
 use Event\Event;

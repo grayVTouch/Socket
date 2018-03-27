@@ -5,7 +5,7 @@
  * Date: 18-3-25
  * Time: 上午5:18
  */
-require_once './function/array.php';
+require_once './Function/array.php';
 require_once './event/Event.php';
 require_once './event/Select.php';
 

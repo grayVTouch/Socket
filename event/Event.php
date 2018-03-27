@@ -22,6 +22,9 @@ interface Event
     // 添加定时器事件
     public static function addTimer(int $after , bool $repeat , $callback , $args = null);
 
+    // 循环间隔定时器
+    public static function addLoopTimer(int $time , bool $repeat , $callback , $args = null);
+
     // 添加 io 事件
     public static function addIo($fd , int $flag , $callback , $args = null);
 
@@ -36,4 +39,7 @@ interface Event
     // 链接断开后,该连接标识符仍然还在
     // 持续这样的话,会导致内存使用量持续增加
     public static function delete(string $id);
+
+    // 生成 watcher 对象
+    public static function genEvCtrl();
 }

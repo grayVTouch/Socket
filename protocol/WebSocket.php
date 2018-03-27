@@ -140,6 +140,19 @@ class WebSocket implements Protocol
         return $first_byte . $second_byte;
     }
 
+    // 心跳检查：是否是客户端 ping
+    public static function isPing(string $data = ''){
+        $first_byte = ord($data[0]);
+
+        $opcode = $first_byte & 15;
+
+        if ($opcode === 9) {
+            return true;
+        }
+
+        return false;
+    }
+
     // 心跳检查：是否是客户端 pong
     public static function isPong(string $data = ''){
         $first_byte = ord($data[0]);

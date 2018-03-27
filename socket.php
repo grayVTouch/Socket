@@ -6,8 +6,8 @@
  * Time: 下午2:54
  */
 
-require_once './function/url.php';
-require_once './function/array.php';
+require_once './Function/url.php';
+require_once './Function/array.php';
 require_once './event/Event.php';
 require_once './event/Select.php';
 

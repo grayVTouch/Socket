@@ -17,10 +17,17 @@ $autoload->register([
         'Connection\\'  => CONNECTION_DIR ,
         'Core\\'        => CORE_DIR ,
         'Event\\'       => EVENT_DIR ,
-        'Protocol\\'    => PROTOCOL_DIR ,
+        'Protocol\\'    => PROTOCOL_DIR
     ] ,
     'file'  => [
-        FUNCTION_DIR . 'array.php' ,
-        FUNCTION_DIR . 'url.php' ,
+        // 工具函数
+        CORE_DIR . 'Function/array.php' ,
+        CORE_DIR . 'Function/base.php' ,
+        CORE_DIR . 'Function/file.php' ,
+        CORE_DIR . 'Function/url.php' ,
+
+        // 系统必须函数
+        CORE_DIR . 'Common/currency.php' ,
+        CORE_DIR . 'Common/tool.php' ,
     ]
 ]);

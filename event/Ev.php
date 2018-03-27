@@ -8,6 +8,8 @@
 
 namespace Event;
 
+use Event\EvCtrl\EvCtrl;
+
 
 class Ev implements Event
 {
@@ -15,11 +17,39 @@ class Ev implements Event
     // 否则事件不会执行
     public static $events = [];
 
+    // 生成事件行为控制者
+    public static function genEvCtrl(\EvWatcher $watcher = null , string $id = ''){
+        return new EvCtrl($watcher , $id);
+    }
+
+    public static function addLoopTimer(int $time , bool $repeat , $callback , $args = null){
+        $id = random(256 , 'mixed' , true);
+
+        static::$events[$id] = [
+            'event'     => null ,
+            'duration'  => 0
+        ];
+
+        static::$events[$id]['event'] = new \EvTimer(1 , $repeat , function($watcher) use($id , $time , $callback , $args){
+            static::$events[$id]['duration']++;
+
+            // 事件控制
+            $ev_ctrl = static::genEvCtrl($watcher , $id);
+
+            if (static::$events[$id]['duration'] % $time === 0) {
+                call_user_func($callback , $ev_ctrl , $args);
+            }
+        });
+    }
+
     public static function addTimer(int $after , bool $repeat , $callback , $args = null) {
         $id = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvTimer($after , $repeat , function() use($callback , $args){
-            call_user_func($callback , $args);
+        static::$events[$id] = new \EvTimer($after , $repeat , function($watcher) use($id , $callback , $args){
+            // 事件控制
+            $ev_ctrl = static::genEvCtrl($watcher , $id);
+
+            call_user_func($callback , $ev_ctrl , $args);
         });
     }
 
@@ -27,16 +57,22 @@ class Ev implements Event
         $flag   = $flag === self::READ ? \Ev::READ : ($flag === self::WRITE ? \Ev::WRITE : \Ev::READ | \Ev::WRITE);
         $id     = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvIo($fd , $flag , function() use($fd , $callback , $args){
-            call_user_func($callback , $fd , $args);
+        static::$events[$id] = new \EvIo($fd , $flag , function($watcher) use($id , $fd , $callback , $args){
+            // 事件控制
+            $ev_ctrl = static::genEvCtrl($watcher , $id);
+
+            call_user_func($callback , $ev_ctrl , $fd , $args);
         });
     }
 
     public static function addSignal(int $signum , $callback , $args = null){
         $id = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvSignal($signum , function() use($callback , $args){
-            call_user_func($callback , $args);
+        static::$events[$id] = new \EvSignal($signum , function($watcher) use($id , $callback , $args){
+            // 事件控制
+            $ev_ctrl = static::genEvCtrl($watcher , $id);
+
+            call_user_func($callback , $ev_ctrl , $watcher->signum , $args);
         });
     }
 
@@ -44,7 +80,7 @@ class Ev implements Event
         \Ev::run();
     }
 
-    public static function delete(string $id){
+    public static function delete(string $id = ''){
         if (isset(static::$events[$id])) {
             unset(static::$events[$id]);
         }

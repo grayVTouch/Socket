@@ -1,0 +1,32 @@
+----- Exception Start -----
+Exception: Time:2018-03-26 14:07:11  File:/var/Website/Socket/core/Application.php  Line:380  Message:Call to undefined method Core\Exception::handle()
+#0 /var/Website/Socket/core/Application.php Core\Application->server(300)
+#1 /var/Website/Socket/core/Application.php Core\Application->_listenForChild(246)
+#2 /var/Website/Socket/core/Application.php Core\Application->fork(612)
+#3 /var/Website/Socket/app.php Core\Application->run(21)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-26 14:56:16  File:/var/Website/Socket/core/Logs.php  Line:38  Message:日志目录不存在： 
+#0 /var/Website/Socket/core/Application.php Core\Logs->(626)
+#1 /var/Website/Socket/core/Application.php Core\Application->(641)
+#2 /var/Website/Socket/app.php Core\Application->(21)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-26 16:19:39  File:/var/Website/Socket/core/Application.php  Line:646  Message:Call to undefined method Core\Application::event()
+#0 /var/Website/Socket/core/Application.php Core\Application->(682)
+#1 /var/Website/Socket/app.php Core\Application->(21)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-26 16:20:24  File:/var/Website/Socket/core/Application.php  Line:646  Message:Call to undefined method Core\Application::event()
+#0 /var/Website/Socket/core/Application.php Core\Application->addTimer(682)
+#1 /var/Website/Socket/app.php Core\Application->run(21)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-26 22:22:46  File:/var/Website/Socket/core/Forward.php  Line:705  Message:Call to undefined method Core\Forward::addTimer()
+#0 /var/Website/Socket/app.php Core\Forward->run(21)
+----- Exception End ------
+

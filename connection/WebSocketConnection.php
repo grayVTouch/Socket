@@ -73,7 +73,7 @@ class WebSocketConnection implements Connection
 
     // 判断是否是 ping
     public function isPing(string $data = ''){
-        return WebSocket::isPong($data);
+        return WebSocket::isPing($data);
     }
 
     public function isPong(string $data = ''){

@@ -11,9 +11,9 @@ namespace Core;
 
 class Exception extends Logs
 {
-    function __construct(){
+    function __construct($app){
         // 构造函数
-        parent::__construct(config('log.log_dir') , 'exception' , config('log.is_send_email'));
+        parent::__construct($app->config('log.log_dir') , 'exception' , $app->config('log.is_send_email'));
     }
 
     // 非调试模式（记录日志）

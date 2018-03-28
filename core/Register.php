@@ -18,9 +18,35 @@ use Event\Ev;
 use Event\Select;
 use Core\Lib\File;
 
+// 注册服务器
+// 1. 有客户端链接，进行消息扩散
+// 2. 有客户端数据
+//  2.1 运行状况数据
+//      2.1.1 进程数量
+//      2.1.2 每个进程下的客户端连接数
+//  2.2 服务器链接关闭数据
+
+
 class Register {
+    // 主进程监听地址
+    public $parent = null;
+    // 子进程监听地址
+    public $child = null;
+    // 协调进程（注册进程）通讯地址
+    public $register = null;
+    // worker 进程通讯地址
+    public $worker = null;
+    // 子进程数量
+    public $count = 1;
+    // 应用配置文件
+    public $appConfig = [];
+    // 心跳检查时间间隔
+    public $heartTime = 30;
+    // 父进程通信通道
+    public $pProcess = null;
+
     // 链接数量
-    public $count = 0;
+    public $connCount = 0;
 
     // 错误
     public $error = null;
@@ -90,7 +116,7 @@ class Register {
     ];
 
     // 取用的事件类型
-    protected $event = null;
+    public $event = null;
 
     // 绑定的事件
     protected $_events = [
@@ -120,16 +146,23 @@ class Register {
 
         // 设置进程所属服务器的标识符
         // 请在配置文件中生成
-        $this->identifier = $this->config('app.identifier');
+        // $this->identifier = $this->config('app.identifier');
 
         // 事件
-        $this->event = $this->getEvent();
+        if (!isset($this->event)) {
+            $this->event = $this->getEvent();
+        }
+
+        $this->appConfig['parent']      = parse_address($this->parent);
+        $this->appConfig['child']       = parse_address($this->child);
+        $this->appConfig['register']    = parse_address($this->register);
+        $this->appConfig['worker']      = parse_address($this->worker);
     }
 
     // 事件名称
     public function getEvent(){
         if (extension_loaded('ev')) {
-            // return Ev::class;
+            return Ev::class;
         }
 
         return Select::class;
@@ -159,9 +192,14 @@ class Register {
     public function fork(){
         $event = $this->event;
 
-        $config = $this->config('register.listen.child');
+        //$config = $this->config('register.listen.child');
 
-        for ($i = 0; $i < $config['count']; ++$i)
+        // 第一种方式用在配置文件进行配置时，用于正式部署没有问题
+        // 不过，如果程序有bug，则不适用于程序调试
+        // for ($i = 0; $i < $config['count']; ++$i)
+
+        // 运行时，确定，适用于测试或正式部署
+        for ($i = 0; $i < $this->count; ++$i)
         {
             // 创建成对的 unix套接字 用于父子进程间通信
             // STREAM_PF_UNIX 表示使用 unix 套接字
@@ -216,7 +254,7 @@ class Register {
                 $connection = new $connection($parent);
 
                 // 保存父进程通信通道
-                $this->parent = $connection;
+                $this->pProcess = $connection;
 
                 $event::addIo($parent , Event::READ , [$this , 'getForChild'] , $connection);
 
@@ -237,10 +275,11 @@ class Register {
     // 子进程心跳检查
     public function heartCheckForChild(){
         $event  = $this->event;
-        $client = $this->config('register.client');
+        // $client = $this->config('register.client');
 
         // 定时循环事件
-        $event::addLoopTimer($client['heart_time'] , true , function($ctrl){
+        // $event::addLoopTimer($client['heart_time'] , true , function($ctrl){
+        $event::addLoopTimer($this->heartTime , true , function($ctrl){
             // 客户端心跳检查用于保持 nginx 链接
             foreach ($this->connectionsForClient as $v)
             {
@@ -269,8 +308,6 @@ class Register {
     public function getForChild($ctrl , $socket , Connection $from){
         $msg    = $from->get();
 
-        var_dump($msg);
-
         if (empty($msg)) {
             return ;
         }
@@ -283,7 +320,7 @@ class Register {
         if (is_callable($this->_events['getForChild'])) {
             call_user_func($this->_events['getForChild']->bindTo($from , null));
         } else {
-            echo "接收到来自父进程的消息:{$msg}\n";
+            // echo "接收到来自父进程的消息:{$msg}\n";
         }
     }
 
@@ -371,7 +408,8 @@ class Register {
         $cid = $this->genCode();
 
         // 配置文件
-        $child = $this->config('register.listen.child');
+        // $child = $this->config('register.listen.child');
+        $child = $this->appConfig['child'];
 
         // 获取协议
         $connection = $this->connection($child['protocol']);
@@ -441,7 +479,8 @@ class Register {
         ]);
 
         // 配置文件
-        $config = $this->config('register.listen.child');
+        // $config = $this->config('register.listen.child');
+        $config = $this->appConfig['child'];
 
         if ($config['protocol'] === 'udp') {
             $address    = "{$config['protocol']}:{$config['ip']}:{$config['port']}";
@@ -467,8 +506,9 @@ class Register {
 
     // 监听来自其他服务器的通信通道
     public function listenServer(){
-        $config     = $this->config('register.listen.parent');
-        $address    = gen_address($config);
+        //$config     = $this->config('register.listen.parent');
+        // $address    = gen_address($config);
+        $address = $this->parent;
 
         $context = stream_context_create([
             'socket' => [
@@ -492,7 +532,7 @@ class Register {
         $event::addIo($server , Event::READ , function($ctrl , $socket) use($event){
             $client = stream_socket_accept($socket);
 
-            $this->count++;
+            $this->connCount++;
 
             // 远程服务器地址
             $address = stream_socket_get_name($client , true);
@@ -504,7 +544,7 @@ class Register {
             // 向子进程发送消息
             $send = [
                 'address' => $address ,
-                'count' => $this->count ,
+                'count' => $this->connCount ,
             ];
 
             $send = json_encode($send);
@@ -622,7 +662,7 @@ class Register {
 
     // 错误处理
     public function errorHandle(){
-        $this->error = new Error();
+        $this->error = new Error($this);
 
         if (DEBUG) {
             set_error_handler([$this->error , 'debug']);
@@ -642,7 +682,7 @@ class Register {
 
     // 设置异常处理
     public function exceptionHandle(){
-        $this->exception = new Exception();
+        $this->exception = new Exception($this);
 
         if (DEBUG) {
             set_exception_handler([$this->exception , 'debug']);
@@ -680,7 +720,7 @@ class Register {
 
     // 日志处理
     public function logHandle(){
-        $config = config('log');
+        $config = $this->config('log');
 
         $this->log = new Logs($config['log_dir'] , 'run' , $config['is_send_email']);
     }

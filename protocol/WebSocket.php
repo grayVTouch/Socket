@@ -142,6 +142,10 @@ class WebSocket implements Protocol
 
     // 心跳检查：是否是客户端 ping
     public static function isPing(string $data = ''){
+        if (empty($data)) {
+            return false;
+        }
+
         $first_byte = ord($data[0]);
 
         $opcode = $first_byte & 15;
@@ -155,6 +159,10 @@ class WebSocket implements Protocol
 
     // 心跳检查：是否是客户端 pong
     public static function isPong(string $data = ''){
+        if (empty($data)) {
+            return false;
+        }
+
         $first_byte = ord($data[0]);
 
         $opcode = $first_byte & 15;
@@ -168,6 +176,10 @@ class WebSocket implements Protocol
 
     // 检查是否是分片消息
     public static function isFrame(string $data = ''){
+        if (empty($data)) {
+            return false;
+        }
+
         $first_byte = ord($data[0]);
 
         $fin    = $first_byte >> 7;
@@ -178,6 +190,10 @@ class WebSocket implements Protocol
 
     // 检查分片消息开始
     public static function isFrameStart(string $data = ''){
+        if (empty($data)) {
+            return false;
+        }
+
         $first_byte = ord($data[0]);
 
         $fin    = $first_byte >> 7;
@@ -188,6 +204,10 @@ class WebSocket implements Protocol
 
     // 检查分片消息结束
     public static function isFrameEnd(string $data = ''){
+        if (empty($data)) {
+            return false;
+        }
+
         $first_byte = ord($data[0]);
 
         $fin    = $first_byte >> 7;
@@ -207,6 +227,10 @@ class WebSocket implements Protocol
 
     // 检查客户端是否已关闭链接
     public static function isClose(string $data = ''){
+        if (empty($data)) {
+            return false;
+        }
+
         $first_byte = ord($data[0]);
 
         $opcode = $first_byte & 15;

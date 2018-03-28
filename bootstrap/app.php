@@ -23,21 +23,3 @@ const PROTOCOL_DIR      = ROOT_DIR . 'protocol/';
 !defined('DEBUG') ? define('DEBUG' , true) : null;
 
 require_once BOOTSTRAP_DIR . 'autoload.php';
-
-// 转发进程内核
-use Core\Forward;
-// 协调进程内核
-use Core\Register;
-// 业务处理内核
-use Core\Worker;
-
-if (PROCESS_TYPE == 'register') {
-    // 初始化实例
-    $app = new Register();
-} else if (PROCESS_TYPE == 'forward') {
-    $app = new Forward();
-} else if (PROCESS_TYPE == 'worker') {
-    $app = new Worker();
-} else {
-    throw new Exception("不支持的进程类型");
-}

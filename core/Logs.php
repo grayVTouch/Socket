@@ -22,7 +22,8 @@ class Logs {
 	        'debug'     => 'debug' , // 调试日志
 	        'error'     => 'error' ,   // 错误日志
 	        'exception' => 'exception' ,  // 异常日志
-	        'run'       => 'runtime'     // 运行日志
+	        'run'       => 'runtime' ,    // 运行日志
+	        'sys'       => 'system'    // 运行日志
         ];
 
 	    if (in_array($type , array_keys($type_range))) {

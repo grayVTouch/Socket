@@ -11,12 +11,25 @@ function gen_address($data){
     return "{$data['protocol']}://{$data['ip']}:{$data['port']}";
 }
 
-// 获取应用实例
-function app(){
-    return $GLOBALS['app'];
-}
+// 解析地址
+function parse_address($address){
+    if (empty($address)) {
+        return [
+            'protocol'  => 'unknow' ,
+            'ip'        => 'unknow' ,
+            'port'      => 'unknow' ,
+        ];
+    }
 
-// 获取系统配置文件
-function config($k , array $args = []){
-    return $GLOBALS['app']->config($k , $args);
+    $data   = explode('://' , $address);
+    $res    = [
+        'protocol' => $data[0]
+    ];
+
+    $data           = explode(':' , $data[1]);
+    $res['ip']      = $data[0];
+    $res['port']    = $data[1];
+
+    return $res;
+
 }

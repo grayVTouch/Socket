@@ -20,9 +20,9 @@ class Error extends Logs {
          '8191' => 'E_ALL'
     ];
 
-	function __construct(){
+	function __construct($app){
         // 构造函数
-        parent::__construct(config('log.log_dir') , 'error' , config('log.is_send_email'));
+        parent::__construct($app->config('log.log_dir') , 'error' , $app->config('log.is_send_email'));
     }
 
 	// 获取错误等级的 中文说明

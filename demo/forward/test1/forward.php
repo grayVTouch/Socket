@@ -21,8 +21,8 @@ echo "测试用例1-单进程客户端间消息通信启动成功\n";
 // * 3. Register 功能关闭
 // 机器识别码（建议使用公网 ip 作为标识符）
 $app->identifier = '192.168.150.135';
-$app->enable_worker = false;
-$app->enable_register = false;
+$app->enableRegister = false;
+$app->enableWorker = false;
 $app->count = 1;
 $app->parent = 'tcp://127.0.0.1:9100';
 $app->child = 'websocket://127.0.0.1:9101';

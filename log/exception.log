@@ -268,3 +268,58 @@ Exception: Time:2018-03-28 16:42:19  File:/var/Website/Socket/core/Forward.php  
 #5 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(145)
 ----- Exception End ------
 
+----- Exception Start -----
+Exception: Time:2018-03-28 18:02:02  File:/var/Website/Socket/core/Forward.php  Line:689  Message:Call to a member function send() on null
+#0 unknow Core\Forward->Core\{closure}(unknow)
+#1 /var/Website/Socket/event/Select.php call_user_func(226)
+#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
+#3 /var/Website/Socket/core/Forward.php Event\Select::loop(927)
+#4 /var/Website/Socket/core/Forward.php Core\Forward->loop(896)
+#5 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(145)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-28 18:03:31  File:/var/Website/Socket/core/Worker.php  Line:476  Message:链接转发服务器失败，地址：
+#0 /var/Website/Socket/core/Worker.php Core\Worker->genConnection(459)
+#1 unknow Core\Worker->listenForClient(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func(226)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
+#4 /var/Website/Socket/core/Worker.php Event\Select::loop(266)
+#5 /var/Website/Socket/core/Worker.php Core\Worker->fork(821)
+#6 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-29 14:37:39  File:/var/Website/Socket/event/Event.php  Line:41  Message:syntax error, unexpected 'f' (T_STRING), expecting variable (T_VARIABLE)
+#0 unknow Core\Autoload->Core\{closure}(unknow)
+#1 /var/Website/Socket/event/Ev.php spl_autoload_call(14)
+#2 /var/Website/Socket/core/Autoload.php require_once(22)
+#3 unknow Core\Autoload->Core\{closure}(unknow)
+#4 /var/Website/Socket/core/Forward.php spl_autoload_call(194)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->_forkForParent(361)
+#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(917)
+#7 /var/Website/Socket/test/forward.php Core\Forward->run(141)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-29 14:37:39  File:/var/Website/Socket/event/Event.php  Line:41  Message:syntax error, unexpected 'f' (T_STRING), expecting variable (T_VARIABLE)
+#0 unknow Core\Autoload->Core\{closure}(unknow)
+#1 /var/Website/Socket/event/Ev.php spl_autoload_call(14)
+#2 /var/Website/Socket/core/Autoload.php require_once(22)
+#3 unknow Core\Autoload->Core\{closure}(unknow)
+#4 /var/Website/Socket/core/Forward.php spl_autoload_call(295)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(364)
+#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(917)
+#7 /var/Website/Socket/test/forward.php Core\Forward->run(141)
+----- Exception End ------
+
+----- Exception Start -----
+Exception: Time:2018-03-29 14:38:13  File:/var/Website/Socket/core/Forward.php  Line:752  Message:未找到 log.log_dir 对应键值
+#0 /var/Website/Socket/core/Forward.php Core\Forward->Core\{closure}(761)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->Core\{closure}(765)
+#2 /var/Website/Socket/core/Forward.php Core\Forward->_getConfig(772)
+#3 /var/Website/Socket/core/Forward.php Core\Forward->config(845)
+#4 /var/Website/Socket/core/Forward.php Core\Forward->savePid(931)
+#5 /var/Website/Socket/test/forward.php Core\Forward->run(141)
+----- Exception End ------
+

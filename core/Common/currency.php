@@ -31,5 +31,9 @@ function parse_address($address){
     $res['port']    = $data[1];
 
     return $res;
+}
 
+// 生成随机码
+function gen_code(){
+    return random(256 , 'mixed' , true);
 }

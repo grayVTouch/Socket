@@ -22,7 +22,7 @@ class Ev implements Event
         return new EvCtrl($watcher , $id);
     }
 
-    public static function addLoopTimer(int $time , bool $repeat , $callback , $args = null){
+    public static function addLoopTimer(int $time , bool $repeat , $callback , ...$args){
         $id = random(256 , 'mixed' , true);
 
         static::$events[$id] = [
@@ -30,49 +30,63 @@ class Ev implements Event
             'duration'  => 0
         ];
 
-        static::$events[$id]['event'] = new \EvTimer(1 , $repeat , function($watcher) use($id , $time , $callback , $args){
+        static::$events[$id]['event'] = new \EvTimer(1 , $repeat , function($watcher) use($id , $time , $callback , &$args){
             static::$events[$id]['duration']++;
 
             // 事件控制
             $ev_ctrl = static::genEvCtrl($watcher , $id);
 
+            // 添加到数组的首单元
+            array_shift($args , $ev_ctrl);
+
             if (static::$events[$id]['duration'] % $time === 0) {
-                call_user_func($callback , $ev_ctrl , $args);
+                call_user_func_array($callback , $args);
             }
         });
     }
 
-    public static function addTimer(int $after , bool $repeat , $callback , $args = null) {
+    public static function addTimer(int $after , bool $repeat , $callback , ...$args) {
         $id = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvTimer($after , $repeat , function($watcher) use($id , $callback , $args){
+        static::$events[$id] = new \EvTimer($after , $repeat , function($watcher) use($id , $callback , &$args){
             // 事件控制
             $ev_ctrl = static::genEvCtrl($watcher , $id);
 
-            call_user_func($callback , $ev_ctrl , $args);
+            // 添加到数组的首单元
+            array_shift($args , $ev_ctrl);
+
+            call_user_func_array($callback , $args);
         });
     }
 
-    public static function addIo($fd , int $flag , $callback , $args = null){
+    public static function addIo($fd , int $flag , $callback , ...$args){
         $flag   = $flag === self::READ ? \Ev::READ : ($flag === self::WRITE ? \Ev::WRITE : \Ev::READ | \Ev::WRITE);
         $id     = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvIo($fd , $flag , function($watcher) use($id , $fd , $callback , $args){
+        static::$events[$id] = new \EvIo($fd , $flag , function($watcher) use($id , $fd , $callback , &$args){
             // 事件控制
             $ev_ctrl = static::genEvCtrl($watcher , $id);
 
-            call_user_func($callback , $ev_ctrl , $fd , $args);
+            // 添加到数组的首单元
+            array_shift($args , $fd);
+            array_shift($args , $ev_ctrl);
+
+            call_user_func_array($callback , $args);
         });
     }
 
-    public static function addSignal(int $signum , $callback , $args = null){
+    public static function addSignal(int $signum , $callback , ...$args){
         $id = random(256 , 'mixed' , true);
 
-        static::$events[$id] = new \EvSignal($signum , function($watcher) use($id , $callback , $args){
+        static::$events[$id] = new \EvSignal($signum , function($watcher) use($id , $callback , &$args){
             // 事件控制
             $ev_ctrl = static::genEvCtrl($watcher , $id);
 
-            call_user_func($callback , $ev_ctrl , $watcher->signum , $args);
+            // 添加到数组的首单元
+            array_shift($args , $watcher->signum);
+            array_shift($args , $ev_ctrl);
+
+            call_user_func_array($callback , $args);
         });
     }
 

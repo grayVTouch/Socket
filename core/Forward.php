@@ -17,108 +17,82 @@ use Connection\WebSocketConnection;
 use Event\Event;
 use Event\Ev;
 use Event\Select;
+use Event\EvCtrl\EventCtrl;
 use Core\Lib\File;
 
 class Forward {
     // 主进程监听地址
     public $parent = null;
+
     // 子进程监听地址
     public $child = null;
+
     // 协调进程（注册进程）通讯地址
     public $register = null;
+
     // worker 进程通讯地址
     public $worker = null;
+
     // 子进程数量
     public $count = 1;
-    // 应用配置文件
-    public $appConfig = [];
+
     // 心跳检查时间间隔
     public $heartTime = 30;
-    // 父进程通信通道
-    public $pProcess = null;
 
     // 是否启用 register 监控功能
-    public $enableRegister = true;
+    public $enableRegister = false;
 
     // 是否启用 worker 业务逻辑处理功能
-    public $enableWorker = true;
+    public $enableWorker = false;
 
-    // 错误
-    public $error = null;
+    // 受支持的协议
+    public $protocolRange = ['tcp' , 'udp' , 'websocket'];
 
-    // 异常
-    public $exception = null;
+    // 与父进程通信的连接实例
+    public $pConn = null;
+
+    // 所有子进程连接实例
+    public $childConn = [];
+
+    // 父进程与其他服务器通信的连接实例
+    public $connWithServer = [];
+
+    // 所有的客户端连接实例
+    public $clientConn = [];
+
+    // 监控连接实例
+    public $registerConn = null;
+
+    // 服务器 id
+    public $server = null;
+
+    // 当前进程 ID
+    public $pid = null;
+
+    // 取用的事件类型
+    public $event = null;
+
+    // 错误实例
+    protected $_error = null;
+
+    // 异常实例
+    protected $_exception = null;
 
     // 子进程id列表
     protected $_pidList = [];
 
-    // 子进程与链接通道的映射
+    // 子进程与通信连接实例
     protected $_pidMap = [];
 
     // backlog
     protected $_backlog = 10000;
 
-    // 受支持的协议
-    public $protocolRange = ['tcp' , 'udp' , 'websocket'];
+    // 协议配置文件
+    // 将 parent child register worker 解析的具体配置
+    protected $_proConfig = [];
 
-    // 启动前要做的事情
-    public $before = null;
-
-    // 启动后要做的事情
-    public $after = null;
-
-    // 子进程连接实例
-    public $connectionsForChild = [];
-
-    // 机器识别id
-    public $identifier = null;
-
-    // 主进程ID
-    public $pid = null;
-
-    // 父子进程通信格式
-    // 来自谁
-    // 机器标识码
-    // 通信地址
-    // 进程ID
-    // 客户端ID
-    protected $_format = [
-        //
-    ];
-
-    // 端口重用
-    public $reuseport = false;
-
-    // 客户端链接实例集合
-    public $connectionsForClient = [];
-
-    // 主进程接收到的其他服务器客户端 socket 对应的 connection 实例
-    public $connectionsForToOtherServer = [];
-
-    // 主进程连接其他服务器产生的 socket 对应的 连接实例
-    public $connectionsForOtherServer = [];
-
-    // 配置文件
+    // 应用配置配置文件
     protected $_sysConfig = [];
-
-    // 与其他服务器交流格式（支持 Worker 模式）
-    protected $_formatForOtherServer = [
-        // 发送方机器表示码
-        'from_machine'  => '' ,
-        // 发送给那台服务器
-        'to_machine'    => '' ,
-        // 那台服务器的地址
-        'to_address'    => '' ,
-        // 想要通信的子进程
-        'to_pid'        => '' ,
-        // 想要通信的子进程下的客户端id
-        'to_cid'        => '' ,
-        // 要转发的消息
-        'to_msg'        => ''
-    ];
-
-    // 取用的事件类型
-    public $event = null;
 
     // 绑定的事件
     protected $_events = [
@@ -126,41 +100,49 @@ class Forward {
         'registerSuccess'   => null ,
         // 主进程连接协调进程失败时回调
         'registerFailed'    => null ,
-        // 主进程创建对其他服务器链接的监听 socket 成功时回调
-        'parentListenSuccess' => null ,
-        // 主进程收到消息时回调(可以是其他服务器发送过来的,也可以是子进程发送的)
-        'getForParent' => null ,
-        // 子进程接收到消息时回调(可以是父进程发送的,也可以是客户端发送的)
-        'getForChild' => null ,
+        // 父进程消息发送失败的时候
+        'errorForParent' => null ,
+        // 接收到来自其他服务器连接时
+        'openFromServer' => null ,
+        // 接收到来自其他服务器消息时
+        'messageFromServer' => null ,
+        // 其他服务器关闭关闭连接时
+        'closeFromServer' => null ,
+        // 子进程接收到父进程消息时
+        'messageFromParent' => null ,
+        // 子进程消息发送失败的时候触发
+        'errorForChild' => null ,
         // 客户端链接成功时回调
         'open' => null ,
         // 收到客户端消息时回调
         'message' => null ,
         // 客户端断开时回调
-        'close' => null
+        'close' => null ,
+        // 发送方是客户端：消息处理失败时回调
+        'error' => null
     ];
 
-    // 日志处理
-    public $log = null;
+    // 运行时日志实例
+    protected $_logForRun = null;
 
-    // 设置通信环境
+    // 系统运行日志实例
+    protected $_logForSys = null;
+
+    // 设置程序运行环境（父子进程共用）
     public function setEnv(){
-        // 当前进程ID(父进程ID,子进程会在自己的进程中设置)
+        // 设置进程 id
         $this->pid = posix_getpid();
 
-        // 设置进程所属服务器的标识符
-        // 请在配置文件中生成
-        // $this->identifier = $this->config('app.identifier');
-
-        // 事件
+        // 获取要采用的事件模块
         if (!isset($this->event)) {
             $this->event = $this->getEvent();
         }
 
-        $this->appConfig['parent']      = parse_address($this->parent);
-        $this->appConfig['child']       = parse_address($this->child);
-        $this->appConfig['register']    = parse_address($this->register);
-        $this->appConfig['worker']      = parse_address($this->worker);
+        // 解析通讯地址
+        $this->_proConfig['parent']      = parse_address($this->parent);
+        $this->_proConfig['child']       = parse_address($this->child);
+        $this->_proConfig['register']    = parse_address($this->register);
+        $this->_proConfig['worker']      = parse_address($this->worker);
     }
 
     // 事件名称
@@ -172,8 +154,8 @@ class Forward {
         return Select::class;
     }
 
-    // 获取对应的客户端连接
-    public function connection(string $protocol = ''){
+    // 获取通信协议对应的链接类
+    public function getClassForPro(string $protocol = ''){
         switch ($protocol)
         {
             case 'tcp':
@@ -192,13 +174,525 @@ class Forward {
         $this->_events[$event] = $callback;
     }
 
-    // 产生子进程
-    public function fork(){
+    // fork 过程中父进程要做的事情
+    protected function _forkForParent($pid , $pair){
         $event = $this->event;
 
-        // $config = $this->config('forward.listen.child');
+        // 关闭其中一个就好
+        fclose($pair[1]);
 
-        // for ($i = 0; $i < $config['count']; ++$i)
+        $child = $pair[0];
+
+        // 设置阻塞模式
+        stream_set_blocking($child , false);
+
+        // 保存子进程id
+        $this->_pidList[] = $pid;
+
+        // 获取连接类名称
+        $class = $this->getClassForPro('tcp');
+        $conn = new $class($child);
+
+        // 保存链接
+        $this->childConn[$pid] = $conn;
+
+        // 监听子进程消息
+        $event::addIo($child , Event::READ , [$this , 'monitorChild'] , $conn);
+    }
+
+    // 记录运行时日志
+    protected function _log($type , $msg){
+        $line = "父进程接收到来自子进程的消息：{$msg}\n";
+
+        if (DEBUG) {
+            echo $line;
+        }
+
+        if ($type == 'run') {
+            // 记录运行时日志
+            $this->_logForRun->log($line);
+        } else if ($type == 'sys') {
+            // 记录系统日志
+            $this->_logForSys->log($line);
+        } else {
+            // 待定 ...
+        }
+    }
+
+    // 消息回传逻辑
+    protected function _returnMsg(array $data = []){
+        // 进行消息回传
+        if ($data['origin_server'] == $this->server) {
+            if (!isset($this->childConn[$data['origin_pid']])) {
+                $line = "消息类型：forward：消息回传失败，同一服务器下，对应的子进程未找到\n";
+                $this->_log('run' , $line);
+            }
+
+            $to = $this->childConn[$data['to_pid']];
+
+            $send = [
+                'type'          => 'error' ,
+                'origin_server' => $data['origin_server'] ,
+                'origin_address' => $data['origin_address'] ,
+                'origin_pid'    => $data['origin_pid'] ,
+                'origin_message' => $data['origin_message'] ,
+                'from_server'   => $this->server ,
+                'from_address'  => $this->parent ,
+                'from_pid'      => $this->pid ,
+                'to_server'     => $data['to_server'] ,
+                'to_address'    => $data['to_address'] ,
+                'to_pid'        => $data['to_pid'] ,
+                'to_cid'        => $data['to_cid'] ,
+                'to_msg'        => $data['to_msg']
+            ];
+
+            $send = json_encode($send);
+
+            $to->send($send);
+        } else {
+            // 不同服务器
+            if (!isset($this->connWithServer[$data['origin_server']])) {
+                $socket = stream_socket_client($data['origin_address'] , $errno , $errstr);
+
+                if (!$socket) {
+                    $line = "消息类型：forward：消息回传失败，连接不上对应的服务器\n";
+                    $this->_log('run' , $line);
+                    return ;
+                }
+
+                $details = parse_address($data['origin_address']);
+                $class = $this->getClassForPro($details['protocol']);
+                $conn = new $class($socket);
+                $this->connWithServer[$data['origin_server']] = $conn;
+            }
+
+            $to = $this->connWithServer[$data['origin_server']];
+
+            $send = [
+                'type'          => 'error' ,
+                'origin_server' => $data['origin_server'] ,
+                'origin_address' => $data['origin_address'] ,
+                'origin_pid'    => $data['origin_pid'] ,
+                'origin_message' => $data['origin_message'] ,
+                'from_server'   => $this->server ,
+                'from_address'  => $this->parent ,
+                'from_pid'      => $this->pid ,
+                'to_server'     => $data['to_server'] ,
+                'to_address'    => $data['to_address'] ,
+                'to_pid'        => $data['to_pid'] ,
+                'to_cid'        => $data['to_cid'] ,
+                'to_msg'        => $data['to_msg']
+            ];
+
+            $send = json_encode($send);
+
+            $to->send($send);
+        }
+    }
+
+    // 父进程处理子进程的消息
+    protected function _msgHandleFromChild(array $data = []){
+        if ($data['type'] == 'msg') {
+            // 目的明确，就是与父进程直接通信，不掺杂任何其他指令
+            $child = $this->childConn[$data['from_pid']];
+
+            if (is_callable($this->_events['messageFromChild'])) {
+                call_user_func($this->_events['messageFromChild']->bindTo($child , null) , $data['to_msg']);
+            } else {
+                $line = "接收到来自子进程的消息：{$data['to_msg']}\n";
+                $this->_log('run' , $line);
+            }
+        } else if ($data['type'] == 'error') {
+            // 明确表示该数据是消息处理失败时的一个回传消息
+            if ($data['origin_server'] == $this->server) {
+                // 在同一台服务器上
+                if ($data['origin_pid'] == $this->pid) {
+                    if (is_callable($this->_events['error'])) {
+                        call_user_func($this->_events['error'] , $data['origin_message']);
+                    }
+                } else {
+                    if (!isset($this->childConn[$data['to_pid']])) {
+                        $line = "父进程未找到待转发的子进程连接实例\n";
+                        $this->_log('run' , $line);
+                        return ;
+                    }
+
+                    $to = $this->childConn[$data['to_pid']];
+
+                    // 要转发的数据
+                    $send = [
+                        'type'          => 'error' ,
+                        'origin_server' => $data['origin_server'] ,
+                        'origin_address' => $data['origin_address'] ,
+                        'origin_pid'    => $data['origin_pid'] ,
+                        'origin_message' => $data['origin_message'] ,
+                        'from_server'   => $this->server ,
+                        'from_address'  => $this->parent ,
+                        'from_pid'      => $this->pid ,
+                        'to_server'     => $data['to_server'] ,
+                        'to_address'    => $data['to_address'] ,
+                        'to_pid'        => $data['to_pid'] ,
+                        'to_cid'        => $data['to_cid'] ,
+                        'to_msg'        => $data['to_msg']
+                    ];
+
+                    $send = json_encode($send);
+
+                    // 发送消息给指定的数据
+                    $to->send($send);
+                }
+            } else {
+                // 不再同一服务器上
+                if (!isset($this->connWithServer[$data['origin_server']])) {
+                    $socket = stream_socket_client($data['origin_address'] , $errno , $errstr);
+
+                    if (!$socket) {
+                        $line = "消息类型：error：消息处理失败，失败信息回传也失败，原因是因为连接不上对应的服务器\n";
+                        $this->_log('run' , $line);
+                        return ;
+                    }
+
+                    $details = parse_address($data['origin_address']);
+                    $class   = $this->getClassForPro($details['protocol']);
+                    $conn    = new $class($socket);
+                    $this->connWithServer[$data['origin_server']] = $conn;
+                }
+
+                $to = $this->connWithServer[$data['origin_server']];
+
+                $send = [
+                    'type'          => 'error' ,
+                    'origin_server' => $data['origin_server'] ,
+                    'origin_address' => $data['origin_address'] ,
+                    'origin_pid'    => $data['origin_pid'] ,
+                    'origin_message' => $data['origin_message'] ,
+                    'from_server'   => $this->server ,
+                    'from_address'  => $this->parent ,
+                    'from_pid'      => $this->pid ,
+                    'to_server'     => $data['to_server'] ,
+                    'to_address'    => $data['to_address'] ,
+                    'to_pid'        => $data['to_pid'] ,
+                    'to_cid'        => $data['to_cid'] ,
+                    'to_msg'        => $data['to_msg']
+                ];
+
+                $send = json_encode($send);
+
+                $to->send($send);
+            }
+        } else {
+            // 消息转发
+            if ($data['to_server'] == $this->server) {
+                // 同一台服务器上
+                if (!isset($this->childConn[$data['to_pid']])) {
+                    // 消息回传
+                    $this->_returnMsg($data);
+                    return ;
+                }
+
+                $to = $this->childConn[$data['to_pid']];
+
+                // 要转发的数据
+                $send = [
+                    'type'          => 'forward' ,
+                    'origin_server' => $data['origin_server'] ,
+                    'origin_address' => $data['origin_address'] ,
+                    'origin_pid'    => $data['origin_pid'] ,
+                    'origin_message' => $data['origin_message'] ,
+                    'from_server'   => $this->server ,
+                    'from_address'  => $this->parent ,
+                    'from_pid'      => $this->pid ,
+                    'to_server'     => $data['to_server'] ,
+                    'to_address'    => $data['to_address'] ,
+                    'to_pid'        => $data['to_pid'] ,
+                    'to_cid'        => $data['to_cid'] ,
+                    'to_msg'        => $data['to_msg']
+                ];
+
+                $send = json_encode($send);
+
+                // 发送消息给指定的数据
+                $to->send($send);
+            } else {
+                // 要转发到其他服务器
+                if (!isset($this->connWithServer[$data['to_server']])) {
+                    $socket     = stream_socket_client($data['to_server']);
+
+                    if (!$socket) {
+                        // 消息回传
+                        $this->_returnMsg($data);
+                        return ;
+                    }
+
+                    $details    = parse_address($data['to_address']);
+                    $class      = $this->getClassForPro($details['protocol']);
+                    $conn       = new $class($socket);
+
+                    $this->connWithServer[$data['to_server']] = $conn;
+                }
+
+                $to = $this->connWithServer[$data['to_server']];
+
+                $send = [
+                    'type'          => 'forward' ,
+                    'origin_server' => $data['origin_server'] ,
+                    'origin_address' => $data['origin_address'] ,
+                    'origin_pid'    => $data['origin_pid'] ,
+                    'origin_message' => $data['origin_message'] ,
+                    'from_server'   => $this->server ,
+                    'from_address'  => $this->parent ,
+                    'from_pid'      => $this->pid ,
+                    'to_server'     => $data['to_server'] ,
+                    'to_address'    => $data['to_address'] ,
+                    'to_pid'        => $data['to_pid'] ,
+                    'to_cid'        => $data['to_cid'] ,
+                    'to_msg'        => $data['to_msg']
+                ];
+
+                $send = json_encode($send);
+
+                $to->send($send);
+            }
+        }
+    }
+
+    // 资金曾处理父进程的消息
+    protected function _msgHandleFromParent(array $data = []){
+        if ($data['type'] == 'msg') {
+            // 目的明确，就是与父进程直接通信，不掺杂任何其他指令
+            $child = $this->childConn[$data['from_pid']];
+
+            if (is_callable($this->_events['messageFromParent'])) {
+                call_user_func($this->_events['messageFromParent']->bindTo($child , null) , $data['to_msg']);
+            } else {
+                $line = "接收到来自父进程的消息：{$data['to_msg']}\n";
+                $this->_log('run' , $line);
+            }
+        } else if ($data['type'] == 'error') {
+            // 明确表示该数据是消息处理失败时的一个回传消息
+            if ($data['origin_server'] == $this->server) {
+                // 在同一台服务器上
+                if ($data['origin_pid'] == $this->pid) {
+                    if (is_callable($this->_events['error'])) {
+                        call_user_func($this->_events['error'] , $data['origin_message']);
+                    }
+                } else {
+                    if (!isset($this->childConn[$data['to_pid']])) {
+                        $line = "子进程未找到待转发的子进程连接实例\n";
+                        $this->_log('run' , $line);
+                        return ;
+                    }
+
+                    $to = $this->childConn[$data['to_pid']];
+
+                    // 要转发的数据
+                    $send = [
+                        'type'          => 'error' ,
+                        'origin_server' => $data['origin_server'] ,
+                        'origin_address' => $data['origin_address'] ,
+                        'origin_pid'    => $data['origin_pid'] ,
+                        'origin_message' => $data['origin_message'] ,
+                        'from_server'   => $this->server ,
+                        'from_address'  => $this->child ,
+                        'from_pid'      => $this->pid ,
+                        'to_server'     => $data['to_server'] ,
+                        'to_address'    => $data['to_address'] ,
+                        'to_pid'        => $data['to_pid'] ,
+                        'to_cid'        => $data['to_cid'] ,
+                        'to_msg'        => $data['to_msg']
+                    ];
+
+                    $send = json_encode($send);
+
+                    // 发送消息给指定的数据
+                    $to->send($send);
+                }
+            } else {
+                // 不再同一服务器上
+                if (!isset($this->connWithServer[$data['origin_server']])) {
+                    $socket = stream_socket_client($data['origin_address'] , $errno , $errstr);
+
+                    if (!$socket) {
+                        $line = "消息类型：error：消息处理失败，失败信息回传也失败，原因是因为连接不上对应的服务器\n";
+                        $this->_log('run' , $line);
+                        return ;
+                    }
+
+                    $details = parse_address($data['origin_address']);
+                    $class   = $this->getClassForPro($details['protocol']);
+                    $conn    = new $class($socket);
+                    $this->connWithServer[$data['origin_server']] = $conn;
+                }
+
+                $to = $this->connWithServer[$data['origin_server']];
+
+                $send = [
+                    'type'          => 'error' ,
+                    'origin_server' => $data['origin_server'] ,
+                    'origin_address' => $data['origin_address'] ,
+                    'origin_pid'    => $data['origin_pid'] ,
+                    'origin_message' => $data['origin_message'] ,
+                    'from_server'   => $this->server ,
+                    'from_address'  => $this->child ,
+                    'from_pid'      => $this->pid ,
+                    'to_server'     => $data['to_server'] ,
+                    'to_address'    => $data['to_address'] ,
+                    'to_pid'        => $data['to_pid'] ,
+                    'to_cid'        => $data['to_cid'] ,
+                    'to_msg'        => $data['to_msg']
+                ];
+
+                $send = json_encode($send);
+
+                $to->send($send);
+            }
+        } else {
+            // 消息转发
+            if ($data['to_server'] == $this->server) {
+                // 同一台服务器上
+                if (!isset($this->childConn[$data['to_pid']])) {
+                    // 消息回传
+                    $this->_returnMsg($data);
+                    return ;
+                }
+
+                $to = $this->childConn[$data['to_pid']];
+
+                // 要转发的数据
+                $send = [
+                    'type'          => 'forward' ,
+                    'origin_server' => $data['origin_server'] ,
+                    'origin_address' => $data['origin_address'] ,
+                    'origin_pid'    => $data['origin_pid'] ,
+                    'origin_message' => $data['origin_message'] ,
+                    'from_server'   => $this->server ,
+                    'from_address'  => $this->child ,
+                    'from_pid'      => $this->pid ,
+                    'to_server'     => $data['to_server'] ,
+                    'to_address'    => $data['to_address'] ,
+                    'to_pid'        => $data['to_pid'] ,
+                    'to_cid'        => $data['to_cid'] ,
+                    'to_msg'        => $data['to_msg']
+                ];
+
+                $send = json_encode($send);
+
+                // 发送消息给指定的数据
+                $to->send($send);
+            } else {
+                // 要转发到其他服务器
+                if (!isset($this->connWithServer[$data['to_server']])) {
+                    $socket     = stream_socket_client($data['to_server']);
+
+                    if (!$socket) {
+                        // 消息回传
+                        $this->_returnMsg($data);
+                        return ;
+                    }
+
+                    $details    = parse_address($data['to_address']);
+                    $class      = $this->getClassForPro($details['protocol']);
+                    $conn       = new $class($socket);
+
+                    $this->connWithServer[$data['to_server']] = $conn;
+                }
+
+                $to = $this->connWithServer[$data['to_server']];
+
+                $send = [
+                    'type'          => 'forward' ,
+                    'origin_server' => $data['origin_server'] ,
+                    'origin_address' => $data['origin_address'] ,
+                    'origin_pid'    => $data['origin_pid'] ,
+                    'origin_message' => $data['origin_message'] ,
+                    'from_server'   => $this->server ,
+                    'from_address'  => $this->child ,
+                    'from_pid'      => $this->pid ,
+                    'to_server'     => $data['to_server'] ,
+                    'to_address'    => $data['to_address'] ,
+                    'to_pid'        => $data['to_pid'] ,
+                    'to_cid'        => $data['to_cid'] ,
+                    'to_msg'        => $data['to_msg']
+                ];
+
+                $send = json_encode($send);
+
+                $to->send($send);
+            }
+        }
+    }
+
+    // 父进程监听子进程消息
+    public function monitorChild(EventCtrl $ctrl , Connection $child){
+        $msg    = $child->get();
+
+        if (empty($msg)) {
+            // 有的时候,就是坑爹
+            // 即使子进程没有发送消息,该方法也会被触发
+            // 实际获取到的是一个空消息
+            return ;
+        }
+
+        $data = json_decode($msg , true);
+
+        // 处理来自子进程的消息
+        $this->_msgHandleFromChild($data);
+    }
+
+    // fork 过程中子进程要做的事情
+    protected function _forkForChild($pair){
+        $event = $this->event;
+
+        // 设置子进程 ID
+        $this->pid = posix_getpid();
+
+        // 关闭其中一个
+        fclose($pair[0]);
+
+        // 父进程
+        $parent = $pair[1];
+
+        // 设置阻塞模式
+        stream_set_blocking($parent , false);
+
+        // 监听父进程连接
+        $class      = $this->getClassForPro('tcp');
+        $conn = new $class($parent);
+
+        // 保存父进程通信通道
+        $this->pConn = $conn;
+
+        $event::addIo($parent , Event::READ , [$this , 'monitorParent'] , $conn);
+
+        // 创建客户端服务器
+        $this->_createServer();
+
+        // 子进程心跳检查
+        $this->_clienHeartCheck();
+
+        $event::loop();
+
+        // 子进程结束
+        exit;
+    }
+
+    // 监听父进程消息
+    public function monitorParent($ctrl , Connection $parent){
+        $msg    = $parent->get();
+
+        if (empty($msg)) {
+            // 如果消息为空，则表示程序发生了做死的情况！
+            // 无需理会即可
+            return ;
+        }
+
+        $data = json_decode($msg , true);
+
+        $this->_msgHandleFromParent($data);
+    }
+
+    // 产生子进程
+    public function fork(){
         for ($i = 0; $i < $this->count; ++$i)
         {
             // 创建成对的 unix套接字 用于父子进程间通信
@@ -213,213 +707,57 @@ class Forward {
             if ($pid < 0) {
                 throw new \Exception("产生子进程失败，请联系程序开发人员");
             } else if ($pid > 0) {
-                // 关闭其中一个就好
-                fclose($pair[1]);
-
-                $child = $pair[0];
-
-                // 保存子进程id
-                $this->_pidList[] = $pid;
-
-                // 保存映射
-                $this->_pidMap[$pid] = $child;
-
-                // 设置阻塞模式
-                stream_set_blocking($child , false);
-
-                // 获取连接类名称
-                $connection = $this->connection('tcp');
-                $connection = new $connection($child);
-
-                // 创建链接
-                $this->connectionsForChild[$pid] = $connection;
-
-                // 如果接收到子进程消息
-                $event::addIo($child , Event::READ , [$this , 'getForParent'] , $connection);
+                // 父进程要做的事情
+                $this->_forkForParent($pid , $pair);
             } else {
-                // 设置子进程 ID
-                $this->pid = posix_getpid();
-
-                // 关闭其中一个
-                fclose($pair[0]);
-
-                // 父进程
-                $parent = $pair[1];
-
-                // 设置阻塞模式
-                stream_set_blocking($parent , false);
-
-                // 监听父进程连接
-                $connection = $this->connection('tcp');
-                $connection = new $connection($parent);
-
-                // 保存父进程通信通道
-                $this->pProcess = $connection;
-
-                $event::addIo($parent , Event::READ , [$this , 'getForChild'] , $connection);
-
-                // 做子进程该做的事情
-                $this->_listenForChild();
-
-                // 子进程心跳检查
-                $this->heartCheckForChild();
-
-                $event::loop();
-
-                // 子进程不要进入到父进程领域
-                exit;
+                // 子进程要做的事情
+                $this->_forkForChild($pair);
             }
         }
     }
 
     // 子进程心跳检查
-    public function heartCheckForChild(){
+    protected function _clienHeartCheck(){
         $event  = $this->event;
-        // $client = $this->config('forward.client');
 
-        // 定时循环事件
-        // $event::addLoopTimer($client['heart_time'] , true , function($ctrl){
         $event::addLoopTimer($this->heartTime , true , function($ctrl){
-            // 客户端心跳检查用于保持 nginx 链接
-            foreach ($this->connectionsForClient as $v)
+            // 客户端心跳检查用于保持 nginx 连接
+            foreach ($this->clientConn as $v)
             {
-                if (!$v->closed) {
-                    // 单向心跳检查
-                    // 这边会产生一个问题：客户端链接已经断开，且客户端监听事件已经被删除了
-                    // 但是这边的链接却还活着！！
-                    $v->ping();
-                } else {
-                    // 销毁无效的客户端链接
-                    // 防止内存泄漏
-                    unset($this->connectionsForClient[$v->id]);
-                }
+                $v->ping();
             }
         });
     }
 
-    /**
-     * 子进程为父进程做消息转发
-     * 数据交换格式:
-     * [
-     * 'cid' => 10 , // 客户端 id,如果没有的话,那就是发送给当前子进程的
-     * 'msg' => ''  // 消息
-     * ]
-     */
-    public function getForChild($ctrl , $socket , Connection $from){
-        $msg    = $from->get();
-        $data   = json_decode($msg , true);
-
-        if (empty($msg)) {
-            return ;
-        }
-
-        if (empty($data['cid'])) {
-            if (is_callable($this->_events['getForChild'])) {
-                call_user_func($this->_events['getForChild']->bindTo($from , null));
-            } else {
-                echo "接收到来自父进程的消息:{$data['msg']}\n";
-            }
-        } else {
-            if (isset($this->connectionsForClient[$data['cid']])) {
-                $to = $this->connectionsForClient[$data['cid']];
-
-                // 发送数据
-                $to->send($data['msg']);
-            } else {
-                $msg = "在当前客户端连接中未找到指定CID：{$data['cid']}对应的连接！这一般是由于对方下线导致的\n";
-
-                // 如果是调试模式，输出错误信息
-                if (DEBUG) {
-                    echo $msg;
-                }
-
-                $this->logForRun->log($msg);
-            }
-        }
-
-        if (is_callable($this->_events['getForChild'])) {
-            call_user_func($this->_events['getForChild']->bindTo($from , null) , $msg);
-        }
-    }
-
-    /**
-     * 父进程消息转发
-     * [
-     *  'machine' => '' , // 服务器
-     *  'address' => '' , // 通讯地址(要求完整的通讯地址,且必须是 tcp!)
-     *  'pid' => '' , // 进程 id
-     *  'cid' => '' , // 客户端 id
-     *  'msg' => '' // 消息
-     * ]
-     */
-    public function getForParent($ctrl , $socket , Connection $from){
-        $msg    = $from->get();
-
-        if (empty($msg)) {
-            // 有的时候,就是坑爹
-            // 即使子进程没有发送消息,该方法也会被触发
-            // 实际获取到的是一个空消息
-            return ;
-        }
-
-        $data = json_decode($msg , true);
-
-        if ($data['machine'] === $this->identifier) {
-            // 这边提供的 pid 有可能是上次通信时保留的 pid
-            // 并不可信！除非用户登录，否则，并不可信！
-            if (isset($this->connectionsForChild[$data['pid']])) {
-                $to = $this->connectionsForChild[$data['pid']];
-
-                // 要转发的数据
-                $send = [
-                    'cid'   => $data['cid'] ,
-                    'msg'   => $data['msg']
-                ];
-
-                $send = json_encode($send);
-
-                // 发送消息给指定的数据
-                $to->send($send);
-            } else {
-                $msg = "在当前子进程连接中未找到指定PID：{$data['pid']}对应的连接！这一般是由于提供的PID是缓存的PID导致的\n";
-
-                // 如果是调试模式，输出错误信息
-                if (DEBUG) {
-                    echo $msg;
-                }
-
-                $this->logForRun->log($msg);
-            }
-        } else {
-            if (!isset($this->connectionsForToOtherServer[$data['machine']])) {
-                $socket     = stream_socket_client($data['address']);
-                $connection = $this->connection('tcp');
-                $connection = new $connection($socket);
-
-                $this->connectionsForToOtherServer[$data['machine']] = $connection;
-            }
-
-            $send = [
-                'from_machine'  => $this->identifier ,
-                'to_pid'        => $data['pid'] ,
-                'to_cid'        => $data['cid'] ,
-                'to_msg'        => $data['msg']
-            ];
-
-            $send = json_encode($send);
-
-            $this->connectionsForToOtherServer[$data['machine']]->send($send);
-        }
-
-        if (is_callable($this->_events['getForParent'])) {
-            call_user_func($this->_events['getForParent']->bindTo($from , null));
-        }
-    }
-
     // 子进程要做的事情
-    protected function _listenForChild(){
-        // 产生服务器
-        $server = $this->server();
+    protected function _createServer(){
+        // 环境
+        $context = stream_context_create([
+            'socket' => [
+                // 待明确的设置项
+                'backlog'       => $this->_backlog ,
+                // 设置端口复用
+                'so_reuseport'  => true
+            ]
+        ]);
+
+        $details = $this->_proConfig['child'];
+
+        // print_r($config);
+
+        if ($details['protocol'] === 'udp') {
+            $address    = "udp://{$details['ip']}:{$details['port']}";
+            $flag       = STREAM_SERVER_BIND;
+        } else {
+            $address    = "tcp://{$details['ip']}:{$details['port']}";
+            $flag       = STREAM_SERVER_BIND | STREAM_SERVER_LISTEN;
+        }
+
+        $server = stream_socket_server($address , $errno , $errstr , $flag , $context);
+
+        if (!$server) {
+            throw new \Exception("stream_socket_server 运行失败");
+        }
 
         $event = $this->event;
 
@@ -428,10 +766,10 @@ class Forward {
     }
 
     // 产生 worker 链接
-    public function genWorker(){
+    protected function _genWorker(){
         // $config  = $this->config("forward.server.worker");
         // $address = gen_address($config);
-        $config = $this->appConfig['worker'];
+        $config = $this->_proConfig['worker'];
         $address = $this->worker;
 
         $conn = stream_socket_client($address , $errno , $errstr);
@@ -440,10 +778,10 @@ class Forward {
             throw new \Exception('产生 worker 链接失败');
         }
 
-        $connection = $this->connection($config['protocol']);
-        $connection = new $connection($conn);
+        $class = $this->getClassForPro($config['protocol']);
+        $conn = new $class($conn);
 
-        return $connection;
+        return $conn;
     }
 
     // 监听客户端链接
@@ -455,137 +793,84 @@ class Forward {
         stream_set_blocking($client , false);
 
         // 客户端链接标识符
-        $cid = $this->genCode();
+        $cid = gen_code();
 
         // 配置文件
-        $child = $this->appConfig['child'];
+        $child = $this->_proConfig['child'];
 
         // 获取协议
-        $connection = $this->connection($child['protocol']);
-        $connection = new $connection($client , $cid);
+        $class = $this->getClassForPro($child['protocol']);
+        $conn = new $class($client , $cid);
 
         // worker 进程
-        if ($this->enableWorker) {
-            $worker = $this->genWorker();
-        } else {
-            $worker = null;
-        }
+        $worker = $this->enableWorker ? $this->_genWorker() : null;
 
         // 创建客户端链接实例
-        $this->connectionsForClient[$cid] = $connection;
+        $this->clientConn[$cid] = $conn;
 
         $event = $this->event;
 
-        $event::addIo($client , Event::READ , [$this , 'listenForClient'] , [
-            'from' => $connection ,
-            'worker' => $worker
-        ]);
+        $event::addIo($client , Event::READ , [$this , 'monitorClient'] , $conn , $worker);
 
         if (is_callable($this->_events['open'])) {
-            call_user_func($this->_events['open']->bindTo($connection , null));
+            call_user_func($this->_events['open']->bindTo($conn , null));
         }
     }
 
     // 监听客户端数据
-    public function listenForClient($ctrl , $socket , $args){
-        $from   = $args['from'];
-        $worker = $args['worker'];
-        $msg    = $from->get();
+    public function monitorClient($ctrl , $socket , Connection $client , $worker){
+        $msg    = $client->get();
 
-        if (is_null($msg)) {
+        if (empty($msg)) {
+            // 程序做死的情况下经常发生这种事情
             return ;
         }
 
-        if ($from->isPing($msg)) {
-            $from->pong();
+        if ($client->isPing($msg)) {
+            $client->pong();
             return ;
         }
 
-        if ($from->isPong($msg)) {
+        if ($client->isPong($msg)) {
             return ;
         }
 
-        if ($from->isClose($msg)) {
-            $from->closed = true;
-
-            // 关闭事件监听
+        if ($client->isClose($msg)) {
+            // 删除事件
             $ctrl->delete();
+
+            // 删除链接
+            unset($this->clientConn[$client->id]);
+
+            // 删除 worker
+            unset($worker);
 
             // 客户端断开回调
             if (is_callable($this->_events['close'])) {
                 // 传入客户端 id
-                call_user_func($this->_events['close']->bindTo($from , null));
+                call_user_func($this->_events['close']);
             }
-
-            // 删除客户端链接
-            unset($this->connectionsForClient[$from->id]);
 
             return ;
         }
 
         if (is_callable($this->_events['message'])) {
-            if (is_null($worker)) {
-                call_user_func($this->_events['message']->bindTo($from , null) , $msg);
+            if ($this->enableWorker) {
+                call_user_func($this->_events['message']->bindTo($client , null) , $msg);
             } else {
                 // 启用了 worker 的话，你只要按照发送规定的格式发送消息给 worker 进程就好
-                call_user_func($this->_events['message']->bindTo($from , null) , $msg , $worker);
+                call_user_func($this->_events['message']->bindTo($client , null) , $msg , $worker);
             }
         } else {
-            echo "接收到客户端数据:{$msg}\n";
+            echo "子进程接收到客户端数据:{$msg}\n";
         }
     }
 
-    // 产生服务端
-    public function server(){
-        // 环境
-        $context = stream_context_create([
-            'socket' => [
-                // 待明确的设置项
-                'backlog'       => $this->_backlog ,
-                // 设置端口复用
-                'so_reuseport'  => true
-            ]
-        ]);
-
-        // 配置文件
-        // $config = $this->config('forward.listen.child');
-        $config = $this->appConfig['child'];
-
-        // print_r($config);
-
-        if ($config['protocol'] === 'udp') {
-            $address    = "{$config['protocol']}:{$config['ip']}:{$config['port']}";
-            $flag       = STREAM_SERVER_BIND;
-        } else {
-            $address    = "tcp://{$config['ip']}:{$config['port']}";
-            $flag       = STREAM_SERVER_BIND | STREAM_SERVER_LISTEN;
-        }
-
-        $server = stream_socket_server($address , $errno , $errstr , $flag , $context);
-
-        if (!$server) {
-            throw new \Exception("stream_socket_server 运行失败");
-        }
-
-        return $server;
-    }
-
-    // 生成随机码
-    public function genCode(){
-        return random(256 , 'mixed' , true);
-    }
-
-    // 链接协调进程
+    // 连接协调进程（保留监控功能）
     public function connectRegister(){
-        // 注册服务器配置文件
-        // $config  = $this->config('forward.server.register');
-        $address = $this->register;
-        // $address = gen_address($config);
-
-        $socket = stream_socket_client($address , $errno , $errstr);
+        $socket = stream_socket_client($this->register , $errno , $errstr);
 
         if (!$socket) {
-            // 说明并没有设置协调服务器
             if (is_callable($this->_events['registerFailed'])) {
                 call_user_func($this->_events['registerFailed'] , $errno , $errstr);
             }
@@ -593,38 +878,24 @@ class Forward {
             return ;
         }
 
-        $connection = $this->connection('tcp');
-        $connection = new $connection($socket);
+        $details    = parse_address($this->register);
+        $class      = $this->getClassForPro($details['protocol']);
+        $conn       = new $class($socket);
 
-        $event = $this->event;
+        // 保存与监控进程的连接
+        $this->registerConn = $conn;
 
-        $event::addIo($socket , Event::READ , function() use($connection){
-            $msg = $connection->get();
-
-            if (empty($msg)) {
-                return ;
-            }
-
-            if ($connection->isPing($msg)) {
-                // 响应
-                $connection->pong();
-            }
-        });
-
-        // 可能需要发送监听端口的信息
-        // 如果不需要,则无需理会 ....
+        // 报告当前进程标识符，通讯地址
+        // 报告子进程数量
+        // 报告每个子进程链接数量
 
         if (is_callable($this->_events['registerSuccess'])) {
-            call_user_func($this->_events['registerSuccess'] , $connection);
+            call_user_func($this->_events['registerSuccess'] , $conn);
         }
     }
 
     // 监听来自其他服务器的通信通道
-    public function listenServer(){
-        // $config     = $this->config('forward.listen.parent');
-        // $address    = gen_address($config);
-        $address = $this->parent;
-
+    public function monitorServer(){
         $context = stream_context_create([
             'socket' => [
                 'backlog'       => $this->_backlog ,
@@ -636,7 +907,7 @@ class Forward {
         ]);
 
         // 通信服务器
-        $server = stream_socket_server($address , $errno , $errstr , STREAM_SERVER_BIND | STREAM_SERVER_LISTEN , $context);
+        $server = stream_socket_server($this->parent , $errno , $errstr , STREAM_SERVER_BIND | STREAM_SERVER_LISTEN , $context);
 
         if (!$server) {
             // 如果创建失败,表示未进行分布式部署
@@ -647,47 +918,135 @@ class Forward {
 
         $event::addIo($server , Event::READ , function($ctrl , $socket) use($event){
             $client = stream_socket_accept($socket);
+            $class  = $this->getClassForPro('tcp');
+            $conn   = new $class($client);
 
-            $connection = $this->connection('tcp');
-            $connection = new $connection($client);
-
-            $event::addIo($client , Event::READ , function($ctrl , $socket) use($connection){
-                $msg = $connection->get();
+            $event::addIo($client , Event::READ , function($ctrl , $socket) use($conn){
+                $msg = $conn->get();
 
                 if (empty($msg)) {
-                    return ;
-                }
-
-                // 如果是心跳检查,返回响应
-                if ($connection->isPing($msg)) {
-                    $connection->pong();
+                    // 如果消息为空，表示程序做死
                     return ;
                 }
 
                 $data = json_decode($msg , true);
 
-                // 产生的客户端
-                if (!isset($this->connectionsForOtherServer[$data['from_machine']])) {
-                    // 第一次通信进保存链接
-                    $this->connectionsForOtherServer[$data['from_machine']] = $connection;
+                if ($data['type'] == 'msg') {
+                    if (!isset($this->connWithServer[$data['from_server']])) {
+                        $this->connWithServer[$data['from_server']] = $conn;
+                    }
+
+                    // 通信失败
+                    $origin = $data['to_msg']['origin'];
+
+                    if (!isset($this->childConn[$origin['to_pid']])) {
+                        $line = "接收到其他服务器的反馈消息，但是由于原发送方已经不存在了，此次通信结束\n";
+
+                        if (DEBUG) {
+                            echo $line;
+                        }
+
+                        $this->_logForRun->log($line);
+
+                        return ;
+                    }
+
+                    // 消息转发
+                    $to = $this->childConn[$origin['to_pid']];
+
+                    $send = [
+                        'type'  => 'msg' ,
+                        'cid'   => $data['to_cid'] ,
+                        'msg'   => $data['to_msg']
+                    ];
+
+                    $send = json_encode($send);
+
+                    $to->send($send);
                 } else {
-                    // 要求进行消息转发
-                    if (empty($data['to_pid'])) {
-                        echo "其他服务器主进程发送当前服务器主进程的消息:{$data['to_msg']}\n";
-                    } else {
-                        // 找到对应的子进程通信链接
-                        $to = $this->connectionsForChild[$data['to_pid']];
+                    // 消息转发
+                    if ($data['to_server'] != $this->server) {
+                        $line = "接收到来自其他服务器的消息，但是这个消息本不该发送到这儿的\n";
+
+                        if (DEBUG) {
+                            echo $line;
+                        }
+
+                        // 记录运行日志
+                        $this->logForRun->log($line);
 
                         $send = [
-                            'cid' => $data['to_cid'] ,
-                            'msg' => $data['to_msg']
+                            'type'          => 'msg' ,
+                            'from_server'   => $this->server ,
+                            'to_server'     => $data['from_server'] ,
+                            'to_address'    => null ,
+                            'to_pid'        => null ,
+                            'to_cid'        => null ,
+                            'to_msg'        => [
+                                'status'    => 'failed' ,
+                                'msg'       => $line ,
+                                'origin'    => $data
+                            ]
                         ];
 
                         $send = json_encode($send);
 
-                        // 转发消息
-                        $to->send($send);
+                        // 通知发送方
+                        $conn->send($send);
+
+                        return ;
                     }
+                    
+                    // 如果未找到对应的进程 id
+                    if (!isset($this->childConn[$data['to_pid']])) {
+                        $line = "当前服务器上未找到对应的进程id\n";
+
+                        if (DEBUG) {
+                            echo $line;
+                        }
+
+                        // 记录运行日志
+                        $this->logForRun->log($line);
+
+                        $send = [
+                            'type'          => 'msg' ,
+                            'from_server'   => $this->server ,
+                            'to_server'     => $data['from_server'] ,
+                            'to_address'    => null ,
+                            'to_pid'        => null ,
+                            'to_cid'        => null ,
+                            'to_msg'        => [
+                                'status'    => 'failed' ,
+                                'msg'       => $line ,
+                                'origin'    => $data
+                            ]
+                        ];
+
+                        $send = json_encode($send);
+
+                        // 通知发送方
+                        $conn->send($send);
+
+                        return ;
+                    }
+
+                    $to = $this->childConn[$data['to_pid']];
+                    $send = [
+                        'cid'   => $data['to_cid'] ,
+                        'msg'   => $data['to_msg']
+                    ];
+
+                    // 如果未找到对应的客户端连接
+                    if (!isset($this->clientConn[$data['to_cid']])) {
+                        $send['type'] = 'msg';
+                    } else {
+                        $send['type'] = 'forward';
+                    }
+
+                    $send = json_encode($send);
+
+                    // 转发消息
+                    $to->send($send);
                 }
             });
         });
@@ -765,32 +1124,32 @@ class Forward {
 
     // 错误处理
     public function errorHandle(){
-        $this->error = new Error($this);
+        $this->_error = new Error($this);
 
         if (DEBUG) {
-            set_error_handler([$this->error , 'debug']);
+            set_error_handler([$this->_error , 'debug']);
         } else {
-            set_error_handler([$this->error , 'nodebug']);
+            set_error_handler([$this->_error , 'nodebug']);
         }
     }
 
     // 致命错误处理
     public function fetalErrorHandle(){
         if (DEBUG) {
-            register_shutdown_function([$this->error , 'fetalDebug']);
+            register_shutdown_function([$this->_error , 'fetalDebug']);
         } else {
-            register_shutdown_function([$this->error , 'fetalNoDebug']);
+            register_shutdown_function([$this->_error , 'fetalNoDebug']);
         }
     }
 
     // 设置异常处理
     public function exceptionHandle(){
-        $this->exception = new Exception($this);
+        $this->_exception = new Exception($this);
 
         if (DEBUG) {
-            set_exception_handler([$this->exception , 'debug']);
+            set_exception_handler([$this->_exception , 'debug']);
         } else {
-            set_exception_handler([$this->exception , 'nodebug']);
+            set_exception_handler([$this->_exception , 'nodebug']);
         }
     }
 
@@ -826,14 +1185,14 @@ class Forward {
         $config = $this->config('log');
 
         // 运行时日志
-        $this->logForRun = new Logs($config['log_dir'] , 'run' , $config['is_send_email']);
+        $this->_logForRun = new Logs($config['log_dir'] , 'run' , $config['is_send_email']);
         // 系统运行状态日志
-        $this->logForSys = new Logs($config['log_dir'] , 'sys' , $config['is_send_email']);
+        $this->_logForSys = new Logs($config['log_dir'] , 'sys' , $config['is_send_email']);
     }
 
     // 保存 pid 到文件
-    public function saveProcess(){
-        $file = RUN_DIR . 'app.pid';
+    public function savePid(){
+        $file = $this->config('log.log_dir') . 'app.pid';
 
         // 文件不存在，创建
         if (!File::checkFile($file)) {
@@ -853,6 +1212,35 @@ class Forward {
         }
 
         File::wData($file , $lines , 'a');
+    }
+
+    // 进程退出
+    public function exist(){
+        // 程序结束
+        define('APP_END' , time());
+
+        $start_time = date('Y-m-d H:i:s' , APP_START);
+        $end_time   = date('Y-m-d H:i:s' , APP_END);
+
+        // 运行时间
+        $duration   = APP_END - APP_START;
+        $format     = format_time($duration);
+
+        $log = "startTime: {$start_time} endTime: {$end_time} duration: {$duration}s format: {$format}\n";
+
+        // 记录运行是日志
+        $this->_logForSys->log($log);
+
+        // 主进程退出
+        exit;
+    }
+
+    // 开始执行事件循环
+    public function loop(){
+        $event = $this->event;
+
+        // 开启循环监听
+        $event::loop();
     }
 
     // 开始跑程序
@@ -884,47 +1272,16 @@ class Forward {
         }
 
         // 监听来自其他服务器的通信通道(可选)
-        $this->listenServer();
+        $this->monitorServer();
 
         // 安装信号
         $this->signal();
 
         // 保存进程的 pid 到文件
-        $this->saveProcess();
+        $this->savePid();
 
         // 执行循环
         $this->loop();
-    }
-
-    // 进程退出
-    public function exist(){
-        // 先退出子进程
-        // shell_exec('kill -s 9 ' . implode(' ' , $this->_pidList));
-
-        // 程序结束
-        define('APP_END' , time());
-
-        $start_time = date('Y-m-d H:i:s' , APP_START);
-        $end_time   = date('Y-m-d H:i:s' , APP_END);
-
-        // 运行时间
-        $duration   = APP_END - APP_START;
-        $format     = format_time($duration);
-
-        $log = "pid: {$this->pid} startTime: {$start_time} endTime: {$end_time} duration: {$duration}s format: {$format}\n";
-
-        // 记录运行是日志
-        $this->logForSys->log($log);
-
-        exit;
-    }
-
-    // 开始执行事件循环
-    public function loop(){
-        $event = $this->event;
-
-        // 开启循环监听
-        $event::loop();
     }
 
     // 所有进程在推出后都会执行的代码段

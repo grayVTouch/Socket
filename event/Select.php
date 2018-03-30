@@ -50,8 +50,11 @@ class Select implements Event
 
     // 添加循环定时器
     // 单位:s
-    public static function addLoopTimer(int $time , bool $repeat , $callback , $args = null){
-        $id = random(256 , 'mixed' , true);
+    public static function addLoopTimer(int $time , bool $repeat , $callback , ...$args){
+        $id     = random(256 , 'mixed' , true);
+        $ctrl   = static::genEvCtrl($id);
+
+        array_shift($args , $ctrl);
 
         static::$events[$id] = true;
 
@@ -61,14 +64,16 @@ class Select implements Event
             'repeat'    => $repeat ,
             'callback'  => $callback ,
             'args'      => $args ,
-            'count'     => 1 ,
-            'ev_ctrl'   => static::genEvCtrl($id)
+            'count'     => 1
         ];
     }
 
     // 添加定时器
-    public static function addTimer(int $after , bool $repeat , $callback , $args = null){
-        $id = random(256 , 'mixed' , true);
+    public static function addTimer(int $after , bool $repeat , $callback , ...$args){
+        $id     = random(256 , 'mixed' , true);
+        $ctrl   = static::genEvCtrl($id);
+
+        array_shift($args , $ctrl);
 
         static::$events[$id] = true;
 
@@ -76,14 +81,17 @@ class Select implements Event
             'after'     => $after ,
             'repeat'    => $repeat ,
             'callback'  => $callback ,
-            'args'      => $args ,
-            'ev_ctrl'   => static::genEvCtrl($id)
+            'args'      => $args
         ];
     }
 
     // 添加 io 事件
-    public static function addIo($fd , int $flag , $callback , $args = null , array $except = [] , $wait_s = 0 , $wait_ns = 0){
-        $id = random(256 , 'mixed' , true);
+    public static function addIo($fd , int $flag , $callback , ...$args){
+        $id     = random(256 , 'mixed' , true);
+        $ctrl   = static::genEvCtrl($id);
+
+        array_shift($args , $fd);
+        array_shift($args , $ctrl);
 
         static::$events[$id] = true;
 
@@ -92,29 +100,33 @@ class Select implements Event
             'flag'      => $flag ,
             'callback'  => $callback ,
             'args'      => $args ,
-            'except'    => $except ,
-            'wait_s'    => $wait_s ,
-            'wait_ns'   => $wait_ns ,
-            'ev_ctrl'   => static::genEvCtrl($id)
+            'except'    => [] ,
+            'wait_s'    => 0 ,
+            'wait_ns'   => 0
         ];
     }
 
     // 添加信号事件
-    public static function addSignal(int $signal , $callback , $args = null){
-        $id = random(256 , 'mixed' , true);
+    public static function addSignal(int $signal , $callback , ...$args){
+        $id     = random(256 , 'mixed' , true);
+        $ctrl   = static::genEvCtrl($id);
+
+        // 添加信号
+        array_shift($args , $signal);
+        // 添加事件控制
+        array_shift($args , $ctrl);
 
         static::$events[$id] = true;
 
         static::$signalFunctions[$id] = [
             'signal'    => $signal ,
             'callback'  => $callback ,
-            'args'      => $args ,
-            'ev_ctrl'   => static::genEvCtrl($id)
+            'args'      => $args
         ];
 
         // 安装信号处理
-        pcntl_signal($signal , function($signal) use($id , $callback , $args){
-            call_user_func($callback , static::$signalFunctions[$id]['ev_ctrl'] , $signal , $args);
+        pcntl_signal($signal , function($signal) use($id , $callback , &$args){
+            call_user_func_array($callback , $args);
         });
     }
 
@@ -159,7 +171,7 @@ class Select implements Event
                 $v['count']++;
 
                 // 触发事件
-                call_user_func($v['callback'] , $v['ev_ctrl'] , $v['args']);
+                call_user_func_array($v['callback'] , $v['args']);
 
                 if (!$v['repeat']) {
                     // 已经触发的标志
@@ -196,7 +208,7 @@ class Select implements Event
             }
 
             // 触发定时器事件
-            call_user_func($v['callback'] , $v['ev_ctrl'] , $v['args']);
+            call_user_func_array($v['callback'] , $v['args']);
 
             if (!$v['repeat'] && !isset($v['is_trigger'])) {
                 // 设置触发标志
@@ -223,14 +235,14 @@ class Select implements Event
             if ($v['flag'] === self::READ || $v['flag'] === self::BOTH) {
                 foreach ($read as $v1)
                 {
-                    call_user_func($v['callback'] , $v['ev_ctrl'] , $v1 , $v['args']);
+                    call_user_func_array($v['callback'] , $v['args']);
                 }
             }
 
             if ($v['flag'] === self::WRITE || $v['flag'] === self::BOTH) {
                 foreach ($write as $v1)
                 {
-                    call_user_func($v['callback'] , $v['ev_ctrl'] , $v1 , $v['args']);
+                    call_user_func_array($v['callback'] , $v['args']);
                 }
             }
         }

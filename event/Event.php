@@ -20,16 +20,16 @@ interface Event
     public const BOTH = 3;
 
     // 添加定时器事件
-    public static function addTimer(int $after , bool $repeat , $callback , $args = null);
+    public static function addTimer(int $after , bool $repeat , $callback , ...$args);
 
     // 循环间隔定时器
-    public static function addLoopTimer(int $time , bool $repeat , $callback , $args = null);
+    public static function addLoopTimer(int $time , bool $repeat , $callback , ...$args);
 
     // 添加 io 事件
-    public static function addIo($fd , int $flag , $callback , $args = null);
+    public static function addIo($fd , int $flag , $callback , ...$args);
 
     // 添加 信号事件
-    public static function addSignal(int $signum , $callback , $args = null);
+    public static function addSignal(int $signum , $callback , ...$args);
 
     // 开始监听
     public static function loop();

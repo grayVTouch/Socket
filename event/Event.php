@@ -38,8 +38,11 @@ interface Event
     // 为了避免新进一个链接,产生一个 链接标识符
     // 链接断开后,该连接标识符仍然还在
     // 持续这样的话,会导致内存使用量持续增加
-    public static function delete(string $id);
+    public static function destroy(string $id);
 
     // 生成 watcher 对象
-    public static function genEvCtrl();
+    public static function genEventCtrl();
+
+    // 清空已定义事件
+    public static function clear();
 }

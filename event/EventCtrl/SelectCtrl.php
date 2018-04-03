@@ -6,7 +6,7 @@
  * Time: 下午8:08
  */
 
-namespace event\EvCtrl;
+namespace Event\EventCtrl;
 
 use Event\Select;
 
@@ -18,7 +18,7 @@ class SelectCtrl implements EventCtrl
         $this->id = $id;
     }
 
-    public function delete(){
-        Select::delete($this->id);
+    public function destroy(){
+        Select::destroy($this->id);
     }
 }

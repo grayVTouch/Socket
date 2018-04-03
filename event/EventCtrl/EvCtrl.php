@@ -6,7 +6,7 @@
  * Time: 下午7:54
  */
 
-namespace Event\EvCtrl;
+namespace Event\EventCtrl;
 
 use Event\Ev;
 
@@ -20,12 +20,12 @@ class EvCtrl implements EventCtrl
         $this->watcher  = $watcher;
     }
 
-    // 停止
-    public function delete(){
+    // 销毁
+    public function destroy(){
         // 停止事件
         $this->watcher->stop();
 
         // 删除事件
-        Ev::delete($this->id);
+        Ev::destroy($this->id);
     }
 }

@@ -40,19 +40,19 @@ $app->on('open' , function() use($app){
     echo "接受到客户端链接，进入 pid: " . $app->pid . PHP_EOL;
 });
 
-$app->on('message' , function($msg , $worker) use($app , $redis){
+$app->on('message' , function($conn , $msg , $worker) use($app , $redis){
     $data = json_decode($msg , true);
     $users = $redis->get('users');
     $users = json_decode($users , true);
 
     if ($data['type'] === 'login') {
         $users[$data['id']] = [
-            'id'        => $data['id'] ,
+            'uid'       => $data['id'] ,
             'username'  => $data['username'] ,
-            'machine'   => $app->server ,
+            'server'    => $app->server ,
             'address'   => $app->parent ,
             'pid'       => $app->pid ,
-            'cid'       => $this->id
+            'cid'       => $conn->id
         ];
 
         $set = json_encode($users);
@@ -71,70 +71,49 @@ $app->on('message' , function($msg , $worker) use($app , $redis){
     // 找到对应用户数据
     $user = $users[$data['to_id']];
 
-    if ($user['machine'] === $app->server) {
-        // 当前服务器下
-        if ($user['pid'] == $app->pid) {
-            // 同一个子进程
-            if (!isset($app->connectionsForClient[$user['cid']])) {
-                echo "同一台服务器的同进程下！但是对应用户离线，要转发的数据是：{$data['msg']}\n";
-                return ;
-            }
-
-            //$app->connectionsForClient[$user['cid']]->send($data['msg']);
-        } else {
-            // 不同子进程
-            // 将消息转发给父进程
-            // 消息发送格式请遵循系统定义
-            $send = [
-                'machine'    => $user['machine'] ,
-                'address'    => $user['address'] ,
-                'pid'        => $user['pid'] ,
-                'cid'        => $user['cid'] ,
-                'msg'        => $data['msg']
-            ];
-
-            $send = json_encode($send);
-
-            // 发送给父进程后，父进程就会对消息进行中转
-            $app->pProcess->send($send);
+    if ($user['server'] === $app->server && $user['pid'] == $app->pid) {
+        // 同一个子进程
+        if (!isset($app->clientConn[$user['cid']])) {
+            echo "同一台服务器的同进程下！但是对应用户离线，要转发的数据是：{$data['msg']}\n";
+            return;
         }
+
+        $to = $app->clientConn[$user['cid']];
+
+        $to->send($data['msg']);
+
+        // 当前服务器下
     } else {
-        // 其他服务器下
-        // 将消息转发给父进程，其他都交由父进程进行处理
+        // 不同子进程
+        // 将消息转发给父进程
+        // 消息发送格式请遵循系统定义
         $send = [
-            'machine'    => $user['machine'] ,
-            'address'    => $user['address'] ,
-            'pid'        => $user['pid'] ,
-            'cid'        => $user['cid'] ,
-            'msg'        => $data['msg']
+            'type'              => 'forward' ,
+            'origin_server'     => $app->server ,
+            'origin_address'    => $app->child ,
+            'origin_pid'        => $app->pid ,
+            'to_server'         => $user['server'] ,
+            'to_address'        => $user['address'] ,
+            'to_pid'            => $user['pid'] ,
+            'to_cid'            => $user['cid'] ,
+            'to_msg'            => $data['msg']
         ];
 
         $send = json_encode($send);
 
         // 发送给父进程后，父进程就会对消息进行中转
-        $app->pProcess->send($send);
+        $app->pConn->send($send);
     }
-
-    return ;
-
-    $send = [
-        'from_machine' => $app->server ,
-        'to_machine' => $user['machine'] ,
-        'to_address'    => $user['address'] ,
-        'to_pid'        => $user['pid'] ,
-        'to_cid'        => $user['cid'] ,
-        'to_msg'        => $data['msg']
-    ];
-
-    $send = json_encode($send);
-
-    // 将消息统统都发给 worker
-    // $worker->send($send);
 });
 
 $app->on('close' , function() {
     // 关闭链接后
     echo "有客户端链接关闭了\n";
+});
+
+// 实际上转发错误
+$app->on('error' , function($data) use($app){
+    echo "消息转发失败，触发了消息回传机制，错误原因：{$data['msg']}\n";
 });
 
 // 运行程序

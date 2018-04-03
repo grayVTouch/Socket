@@ -18,6 +18,9 @@ trait TraitConnection {
     // 表示链接是否还在使用
     public $closed = false;
 
+    // 上次发送心跳包的时间
+    public $prevTime = null;
+
     // 客户端链接id
     public $id = null;
 

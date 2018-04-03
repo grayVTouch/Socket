@@ -6,11 +6,11 @@
  * Time: 下午8:03
  */
 
-namespace event\EvCtrl;
+namespace Event\EventCtrl;
 
 
 interface EventCtrl
 {
     // 关闭事件
-    public function delete();
+    public function destroy();
 }

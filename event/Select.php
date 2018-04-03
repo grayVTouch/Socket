@@ -8,10 +8,13 @@
 
 namespace Event;
 
-use Event\EvCtrl\SelectCtrl;
+use Event\EventCtrl\SelectCtrl;
 
 class Select implements Event
 {
+    // 标识符
+    public static $idList = [];
+
     // 事件标识符列表
     public static $events = [];
 
@@ -28,7 +31,7 @@ class Select implements Event
     public static $loopTimerFunction = [];
 
     // 轮训间隔时间,单位 us
-    public static $interval = 1; //20000; // 1 * 1000 * 1000; // 20000;
+    public static $interval =  1; //20000; // 1 * 1000 * 1000; // 20000;
 
     // 开始时间
     public static $sTime = 0;
@@ -44,7 +47,9 @@ class Select implements Event
 
     public static $prevTimeForTimer = null;
 
-    public static function genEvCtrl(string $id = '') {
+    public static $ctrls = [];
+
+    public static function genEventCtrl(string $id = '') {
         return new SelectCtrl($id);
     }
 
@@ -52,11 +57,20 @@ class Select implements Event
     // 单位:s
     public static function addLoopTimer(int $time , bool $repeat , $callback , ...$args){
         $id     = random(256 , 'mixed' , true);
-        $ctrl   = static::genEvCtrl($id);
+        $ctrl   = static::genEventCtrl($id);
 
-        array_shift($args , $ctrl);
+        // 保存标识符
+        static::$idList[] = $id;
+
+        // 保存控制实例
+        static::$ctrls[$id] = $ctrl;
+
+        array_unshift($args , $ctrl);
 
         static::$events[$id] = true;
+
+        // 保存控制实例
+        static::$ctrls[$id] = $ctrl;
 
         static::$loopTimerFunction[$id] = [
             'time'      => $time ,
@@ -66,16 +80,24 @@ class Select implements Event
             'args'      => $args ,
             'count'     => 1
         ];
+
+        return $id;
     }
 
     // 添加定时器
     public static function addTimer(int $after , bool $repeat , $callback , ...$args){
         $id     = random(256 , 'mixed' , true);
-        $ctrl   = static::genEvCtrl($id);
+        $ctrl   = static::genEventCtrl($id);
 
-        array_shift($args , $ctrl);
+        // 保存标识符
+        static::$idList[] = $id;
+
+        array_unshift($args , $ctrl);
 
         static::$events[$id] = true;
+
+        // 保存控制实例
+        static::$ctrls[$id] = $ctrl;
 
         static::$timerFunctions[$id] = [
             'after'     => $after ,
@@ -83,17 +105,25 @@ class Select implements Event
             'callback'  => $callback ,
             'args'      => $args
         ];
+
+        return $id;
     }
 
     // 添加 io 事件
     public static function addIo($fd , int $flag , $callback , ...$args){
         $id     = random(256 , 'mixed' , true);
-        $ctrl   = static::genEvCtrl($id);
+        $ctrl   = static::genEventCtrl($id);
 
-        array_shift($args , $fd);
-        array_shift($args , $ctrl);
+        // 保存标识符
+        static::$idList[] = $id;
+
+        array_unshift($args , $fd);
+        array_unshift($args , $ctrl);
 
         static::$events[$id] = true;
+
+        // 保存控制实例
+        static::$ctrls[$id] = $ctrl;
 
         static::$ioFunctions[$id] = [
             'fd'        => $fd ,
@@ -104,19 +134,27 @@ class Select implements Event
             'wait_s'    => 0 ,
             'wait_ns'   => 0
         ];
+
+        return $id;
     }
 
     // 添加信号事件
     public static function addSignal(int $signal , $callback , ...$args){
         $id     = random(256 , 'mixed' , true);
-        $ctrl   = static::genEvCtrl($id);
+        $ctrl   = static::genEventCtrl($id);
+
+        // 保存标识符
+        static::$idList[] = $id;
 
         // 添加信号
-        array_shift($args , $signal);
+        array_unshift($args , $signal);
         // 添加事件控制
-        array_shift($args , $ctrl);
+        array_unshift($args , $ctrl);
 
         static::$events[$id] = true;
+
+        // 保存控制实例
+        static::$ctrls[$id] = $ctrl;
 
         static::$signalFunctions[$id] = [
             'signal'    => $signal ,
@@ -128,6 +166,8 @@ class Select implements Event
         pcntl_signal($signal , function($signal) use($id , $callback , &$args){
             call_user_func_array($callback , $args);
         });
+
+        return $id;
     }
 
     // 开始循环
@@ -254,12 +294,17 @@ class Select implements Event
         pcntl_signal_dispatch();
     }
 
-    // 删除时间
+    // 删除事件
     // @param $id ID
-    public static function delete(string $id){
+    public static function destroy(string $id){
         // 从已定义的事件列表中删除指定事件，如果有的话
         if (isset(static::$events[$id])) {
             unset(static::$events[$id]);
+        }
+
+        // 从以保存的事件控制对象列表中删除
+        if (isset(static::$ctrls[$id])) {
+            unset(static::$ctrls[$id]);
         }
 
         // 从已定义的时间回调函数中删除指定函数，如果有的话
@@ -277,7 +322,19 @@ class Select implements Event
             unset(static::$ioFunctions[$id]);
         }
 
+        if (($key = array_search($id , static::$idList)) !== false) {
+            unset(static::$idList[$key]);
+        }
+
         // 返回被删除的事件 ID
         return $id;
+    }
+
+    // 清空事件（在多进程下防止子进程拥有父进程的事件）
+    public static function clear(){
+        foreach (static::$idList as $v)
+        {
+            self::destroy($v);
+        }
     }
 }

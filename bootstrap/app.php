@@ -2,6 +2,7 @@
 
 // 设置错误报告
 ini_set('display_errors' , 'On');
+
 // 设置报告等级
 error_reporting(E_ALL);
 

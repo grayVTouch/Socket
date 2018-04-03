@@ -23,6 +23,9 @@ class WebSocketConnection implements Connection
     // 客户端链接 id
     public $id = null;
 
+    // 上次发送心跳包的时间
+    public $prevTime = null;
+
 
     function __construct($connection , $id = '') {
         if (!is_resource($connection)) {

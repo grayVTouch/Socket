@@ -1,325 +1,128 @@
 ----- Exception Start -----
-Exception: Time:2018-03-27 16:45:17  File:/var/Website/Socket/core/Register.php  Line:579  Message:未找到 register.client 对应键值
-#0 /var/Website/Socket/core/Register.php Core\Register->Core\{closure}(588)
-#1 /var/Website/Socket/core/Register.php Core\Register->Core\{closure}(592)
-#2 /var/Website/Socket/core/Register.php Core\Register->_getConfig(599)
-#3 /var/Website/Socket/core/Register.php Core\Register->config(237)
-#4 /var/Website/Socket/core/Register.php Core\Register->heartCheckForChild(224)
-#5 /var/Website/Socket/core/Register.php Core\Register->fork(715)
-#6 /var/Website/Socket/register.php Core\Register->run(33)
+Exception: Time:2018-03-31 22:41:39  File:/var/Website/Socket/test/forward.php  Line:121  Message:Cannot access protected property Core\Forward::$_pidList
+#0 unknow {closure}(unknow)
+#1 /var/Website/Socket/core/Forward.php call_user_func(434)
+#2 /var/Website/Socket/core/Forward.php Core\Forward->_msgHandleFromParent(624)
+#3 unknow Core\Forward->monitorParent(unknow)
+#4 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#5 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#6 /var/Website/Socket/core/Forward.php Event\Select::loop(606)
+#7 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(647)
+#8 /var/Website/Socket/core/Forward.php Core\Forward->fork(1107)
+#9 /var/Website/Socket/test/forward.php Core\Forward->run(129)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-27 16:46:13  File:/var/Website/Socket/core/Register.php  Line:579  Message:未找到 register.listen.client 对应键值
-#0 /var/Website/Socket/core/Register.php Core\Register->Core\{closure}(588)
-#1 /var/Website/Socket/core/Register.php Core\Register->Core\{closure}(588)
-#2 /var/Website/Socket/core/Register.php Core\Register->Core\{closure}(592)
-#3 /var/Website/Socket/core/Register.php Core\Register->_getConfig(599)
-#4 /var/Website/Socket/core/Register.php Core\Register->config(237)
-#5 /var/Website/Socket/core/Register.php Core\Register->heartCheckForChild(224)
-#6 /var/Website/Socket/core/Register.php Core\Register->fork(715)
-#7 /var/Website/Socket/register.php Core\Register->run(33)
+Exception: Time:2018-04-01 13:36:28  File:/var/Website/Socket/connection/TraitConnection.php  Line:29  Message:不是 socket 客户端链接
+#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(913)
+#1 unknow Core\Forward->Core\{closure}(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#4 /var/Website/Socket/core/Forward.php Event\Select::loop(1120)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(1161)
+#6 /var/Website/Socket/test/forward.php Core\Forward->run(125)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 11:49:20  File:/var/Website/Socket/forward-1.php  Line:36  Message:Too few arguments to function Closure::{closure}(), 0 passed and exactly 1 expected
-#0 unknow Closure->{closure}(unknow)
-#1 /var/Website/Socket/core/Forward.php call_user_func(457)
-#2 unknow Core\Forward->accept(unknow)
-#3 /var/Website/Socket/event/Select.php call_user_func(226)
-#4 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#5 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(845)
-#7 /var/Website/Socket/forward-1.php Core\Forward->run(77)
+Exception: Time:2018-04-02 09:33:40  File:/var/Website/Socket/core/Forward.php  Line:406  Message:Argument 1 passed to Core\Forward::_msgHandleFromParent() must be of the type array, null given, called in /var/Website/Socket/core/Forward.php on line 591
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_msgHandleFromParent(591)
+#1 unknow Core\Forward->monitorParent(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#4 /var/Website/Socket/core/Forward.php Event\Select::loop(744)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(1227)
+#6 /var/Website/Socket/test/forward.php Core\Forward->run(128)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 11:53:34  File:/var/Website/Socket/forward-1.php  Line:79  Message:Call to undefined method Connection\WebSocketConnection::delete()
-#0 unknow Closure->{closure}(unknow)
-#1 /var/Website/Socket/core/Forward.php call_user_func(489)
-#2 unknow Core\Forward->listenForClient(unknow)
-#3 /var/Website/Socket/event/Select.php call_user_func(226)
-#4 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#5 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(845)
-#7 /var/Website/Socket/forward-1.php Core\Forward->run(82)
+Exception: Time:2018-04-02 09:33:40  File:/var/Website/Socket/core/Forward.php  Line:298  Message:Argument 1 passed to Core\Forward::_msgHandleFromChild() must be of the type array, null given, called in /var/Website/Socket/core/Forward.php on line 573
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_msgHandleFromChild(573)
+#1 unknow Core\Forward->monitorChild(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#4 /var/Website/Socket/core/Forward.php Event\Select::loop(744)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(1227)
+#6 /var/Website/Socket/test/forward.php Core\Forward->run(128)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:03:15  File:/var/Website/Socket/core/Forward.php  Line:798  Message:Call to undefined function Core\config()
-#0 /var/Website/Socket/core/Forward.php Core\Forward->logHandle(839)
-#1 /var/Website/Socket/demo/forward/forward-1.php Core\Forward->run(84)
+Exception: Time:2018-04-02 09:33:40  File:/var/Website/Socket/core/Forward.php  Line:298  Message:Argument 1 passed to Core\Forward::_msgHandleFromChild() must be of the type array, null given, called in /var/Website/Socket/core/Forward.php on line 573
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_msgHandleFromChild(573)
+#1 unknow Core\Forward->monitorChild(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#4 /var/Website/Socket/core/Forward.php Event\Select::loop(1206)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(1247)
+#6 /var/Website/Socket/test/forward.php Core\Forward->run(128)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:40:18  File:/var/Website/Socket/connection/TraitConnection.php  Line:26  Message:不是 socket 客户端链接
-#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(369)
-#1 unknow Core\Forward->getForParent(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(896)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(865)
-#6 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(136)
+Exception: Time:2018-04-02 09:33:40  File:/var/Website/Socket/core/Forward.php  Line:406  Message:Argument 1 passed to Core\Forward::_msgHandleFromParent() must be of the type array, null given, called in /var/Website/Socket/core/Forward.php on line 591
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_msgHandleFromParent(591)
+#1 unknow Core\Forward->monitorParent(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#4 /var/Website/Socket/core/Forward.php Event\Select::loop(744)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(1227)
+#6 /var/Website/Socket/test/forward.php Core\Forward->run(128)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:42:59  File:/var/Website/Socket/connection/TraitConnection.php  Line:26  Message:不是 socket 客户端链接
-#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(369)
-#1 unknow Core\Forward->getForParent(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(896)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(865)
-#6 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(137)
+Exception: Time:2018-04-02 09:33:41  File:/var/Website/Socket/core/Forward.php  Line:406  Message:Argument 1 passed to Core\Forward::_msgHandleFromParent() must be of the type array, null given, called in /var/Website/Socket/core/Forward.php on line 591
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_msgHandleFromParent(591)
+#1 unknow Core\Forward->monitorParent(unknow)
+#2 /var/Website/Socket/event/Select.php call_user_func_array(255)
+#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(167)
+#4 /var/Website/Socket/core/Forward.php Event\Select::loop(744)
+#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(1227)
+#6 /var/Website/Socket/test/forward.php Core\Forward->run(128)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:44:17  File:/var/Website/Socket/connection/TraitConnection.php  Line:26  Message:不是 socket 客户端链接
-#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(369)
-#1 unknow Core\Forward->getForParent(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(848)
-#6 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(132)
+Exception: Time:2018-04-02 17:06:26  File:/var/Website/Socket/core/Forward.php  Line:523  Message:Argument 1 passed to Core\Forward::monitorChild() must be an instance of Event\EvCtrl\EventCtrl, instance of Event\EventCtrl\SelectCtrl given
+#0 unknow Core\Forward->monitorChild(unknow)
+#1 /var/Website/Socket/event/Select.php call_user_func_array(270)
+#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(182)
+#3 /var/Website/Socket/core/Forward.php Event\Select::loop(1134)
+#4 /var/Website/Socket/core/Forward.php Core\Forward->loop(1178)
+#5 /var/Website/Socket/test/forward.php Core\Forward->run(120)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:45:30  File:/var/Website/Socket/connection/TraitConnection.php  Line:26  Message:不是 socket 客户端链接
-#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(369)
-#1 unknow Core\Forward->getForParent(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(848)
-#6 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(134)
+Exception: Time:2018-04-02 21:48:06  File:/var/Website/Socket/core/Forward.php  Line:523  Message:Argument 1 passed to Core\Forward::monitorChild() must be an instance of Event\EvCtrl\EventCtrl, instance of Event\EventCtrl\SelectCtrl given
+#0 unknow Core\Forward->monitorChild(unknow)
+#1 /var/Website/Socket/event/Select.php call_user_func_array(278)
+#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(190)
+#3 /var/Website/Socket/core/Forward.php Event\Select::loop(1140)
+#4 /var/Website/Socket/core/Forward.php Core\Forward->loop(1184)
+#5 /var/Website/Socket/test/forward.php Core\Forward->run(120)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:48:20  File:/var/Website/Socket/connection/TraitConnection.php  Line:26  Message:不是 socket 客户端链接
-#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(369)
-#1 unknow Core\Forward->getForParent(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(896)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(865)
-#6 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(132)
+Exception: Time:2018-04-02 22:38:16  File:/var/Website/Socket/core/Forward.php  Line:638  Message:Call to a member function send() on resource
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(684)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->fork(1197)
+#2 /var/Website/Socket/test/forward.php Core\Forward->run(120)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:49:30  File:/var/Website/Socket/connection/TraitConnection.php  Line:26  Message:不是 socket 客户端链接
-#0 /var/Website/Socket/core/Forward.php Connection\TcpConnection->__construct(369)
-#1 unknow Core\Forward->getForParent(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(896)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->loop(865)
-#6 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(134)
+Exception: Time:2018-04-02 22:38:16  File:/var/Website/Socket/core/Forward.php  Line:638  Message:Call to a member function send() on resource
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(684)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->fork(1197)
+#2 /var/Website/Socket/test/forward.php Core\Forward->run(120)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:51:22  File:/var/Website/Socket/core/Forward.php  Line:364  Message:Call to a member function send() on null
-#0 unknow Core\Forward->getForParent(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->fork(848)
-#5 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(132)
+Exception: Time:2018-04-02 22:38:16  File:/var/Website/Socket/core/Forward.php  Line:638  Message:Call to a member function send() on resource
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(684)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->fork(1197)
+#2 /var/Website/Socket/test/forward.php Core\Forward->run(120)
 ----- Exception End ------
 
 ----- Exception Start -----
-Exception: Time:2018-03-28 14:55:31  File:/var/Website/Socket/core/Forward.php  Line:366  Message:Call to a member function send() on null
-#0 unknow Core\Forward->getForParent(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Forward.php Event\Select::loop(898)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->loop(867)
-#5 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(130)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 14:57:08  File:/var/Website/Socket/core/Forward.php  Line:366  Message:Call to a member function send() on null
-#0 unknow Core\Forward->getForParent(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->fork(850)
-#5 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(130)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 15:07:30  File:/var/Website/Socket/core/Forward.php  Line:326  Message:Call to a member function send() on null
-#0 unknow Core\Forward->getForChild(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Forward.php Event\Select::loop(265)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->fork(858)
-#5 /var/Website/Socket/demo/forward/test2/forward.php Core\Forward->run(130)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:01:11  File:/var/Website/Socket/protocol/WebSocket.php  Line:79  Message:Argument 1 passed to Protocol\WebSocket::genKey() must be of the type string, null given, called in /var/Website/Socket/protocol/WebSocket.php on line 106
-#0 /var/Website/Socket/protocol/WebSocket.php Protocol\WebSocket::genKey(106)
-#1 /var/Website/Socket/connection/WebSocketConnection.php Protocol\WebSocket::hand(39)
-#2 /var/Website/Socket/connection/WebSocketConnection.php Connection\WebSocketConnection->send(53)
-#3 /var/Website/Socket/core/Register.php Connection\WebSocketConnection->get(432)
-#4 unknow Core\Register->listenForClient(unknow)
-#5 /var/Website/Socket/event/Select.php call_user_func(226)
-#6 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#7 /var/Website/Socket/core/Register.php Event\Select::loop(267)
-#8 /var/Website/Socket/core/Register.php Core\Register->fork(773)
-#9 /var/Website/Socket/demo/register/register.php Core\Register->run(41)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:01:59  File:/var/Website/Socket/core/Forward.php  Line:440  Message:产生 worker 链接失败
-#0 /var/Website/Socket/core/Forward.php Core\Forward->genWorker(469)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(267)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(879)
-#6 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(134)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:03:58  File:/var/Website/Socket/core/Forward.php  Line:440  Message:产生 worker 链接失败
-#0 /var/Website/Socket/core/Forward.php Core\Forward->genWorker(469)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(267)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(879)
-#6 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(134)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:13:37  File:/var/Website/Socket/core/Forward.php  Line:440  Message:产生 worker 链接失败
-#0 /var/Website/Socket/core/Forward.php Core\Forward->genWorker(469)
-#1 unknow Core\Forward->accept(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Forward.php Event\Select::loop(267)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->fork(879)
-#6 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(134)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:29:20  File:/var/Website/Socket/core/Worker.php  Line:469  Message:链接转发服务器失败，地址：
-#0 /var/Website/Socket/core/Worker.php Core\Worker->genConnection(452)
-#1 unknow Core\Worker->listenForClient(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Worker.php Event\Select::loop(259)
-#5 /var/Website/Socket/core/Worker.php Core\Worker->fork(813)
-#6 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:30:44  File:/var/Website/Socket/core/Worker.php  Line:476  Message:链接转发服务器失败，地址：
-#0 /var/Website/Socket/core/Worker.php Core\Worker->genConnection(459)
-#1 unknow Core\Worker->listenForClient(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Worker.php Event\Select::loop(266)
-#5 /var/Website/Socket/core/Worker.php Core\Worker->fork(820)
-#6 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:34:59  File:/var/Website/Socket/core/Worker.php  Line:476  Message:链接转发服务器失败，地址：
-#0 /var/Website/Socket/core/Worker.php Core\Worker->genConnection(459)
-#1 unknow Core\Worker->listenForClient(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Worker.php Event\Select::loop(266)
-#5 /var/Website/Socket/core/Worker.php Core\Worker->fork(820)
-#6 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:38:12  File:/var/Website/Socket/core/Worker.php  Line:476  Message:链接转发服务器失败，地址：
-#0 /var/Website/Socket/core/Worker.php Core\Worker->genConnection(459)
-#1 unknow Core\Worker->listenForClient(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Worker.php Event\Select::loop(266)
-#5 /var/Website/Socket/core/Worker.php Core\Worker->fork(820)
-#6 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:40:24  File:/var/Website/Socket/core/Worker.php  Line:466  Message:Call to a member function send() on resource
-#0 unknow Core\Worker->listenForClient(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Worker.php Event\Select::loop(266)
-#4 /var/Website/Socket/core/Worker.php Core\Worker->fork(820)
-#5 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 16:42:19  File:/var/Website/Socket/core/Forward.php  Line:689  Message:Call to a member function send() on null
-#0 unknow Core\Forward->Core\{closure}(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Forward.php Event\Select::loop(927)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->loop(896)
-#5 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(145)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 18:02:02  File:/var/Website/Socket/core/Forward.php  Line:689  Message:Call to a member function send() on null
-#0 unknow Core\Forward->Core\{closure}(unknow)
-#1 /var/Website/Socket/event/Select.php call_user_func(226)
-#2 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#3 /var/Website/Socket/core/Forward.php Event\Select::loop(927)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->loop(896)
-#5 /var/Website/Socket/demo/forward/test3/forward.php Core\Forward->run(145)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-28 18:03:31  File:/var/Website/Socket/core/Worker.php  Line:476  Message:链接转发服务器失败，地址：
-#0 /var/Website/Socket/core/Worker.php Core\Worker->genConnection(459)
-#1 unknow Core\Worker->listenForClient(unknow)
-#2 /var/Website/Socket/event/Select.php call_user_func(226)
-#3 /var/Website/Socket/event/Select.php Event\Select::_loopForIo(138)
-#4 /var/Website/Socket/core/Worker.php Event\Select::loop(266)
-#5 /var/Website/Socket/core/Worker.php Core\Worker->fork(821)
-#6 /var/Website/Socket/demo/worker/worker.php Core\Worker->run(28)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-29 14:37:39  File:/var/Website/Socket/event/Event.php  Line:41  Message:syntax error, unexpected 'f' (T_STRING), expecting variable (T_VARIABLE)
-#0 unknow Core\Autoload->Core\{closure}(unknow)
-#1 /var/Website/Socket/event/Ev.php spl_autoload_call(14)
-#2 /var/Website/Socket/core/Autoload.php require_once(22)
-#3 unknow Core\Autoload->Core\{closure}(unknow)
-#4 /var/Website/Socket/core/Forward.php spl_autoload_call(194)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->_forkForParent(361)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(917)
-#7 /var/Website/Socket/test/forward.php Core\Forward->run(141)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-29 14:37:39  File:/var/Website/Socket/event/Event.php  Line:41  Message:syntax error, unexpected 'f' (T_STRING), expecting variable (T_VARIABLE)
-#0 unknow Core\Autoload->Core\{closure}(unknow)
-#1 /var/Website/Socket/event/Ev.php spl_autoload_call(14)
-#2 /var/Website/Socket/core/Autoload.php require_once(22)
-#3 unknow Core\Autoload->Core\{closure}(unknow)
-#4 /var/Website/Socket/core/Forward.php spl_autoload_call(295)
-#5 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(364)
-#6 /var/Website/Socket/core/Forward.php Core\Forward->fork(917)
-#7 /var/Website/Socket/test/forward.php Core\Forward->run(141)
------ Exception End ------
-
------ Exception Start -----
-Exception: Time:2018-03-29 14:38:13  File:/var/Website/Socket/core/Forward.php  Line:752  Message:未找到 log.log_dir 对应键值
-#0 /var/Website/Socket/core/Forward.php Core\Forward->Core\{closure}(761)
-#1 /var/Website/Socket/core/Forward.php Core\Forward->Core\{closure}(765)
-#2 /var/Website/Socket/core/Forward.php Core\Forward->_getConfig(772)
-#3 /var/Website/Socket/core/Forward.php Core\Forward->config(845)
-#4 /var/Website/Socket/core/Forward.php Core\Forward->savePid(931)
-#5 /var/Website/Socket/test/forward.php Core\Forward->run(141)
+Exception: Time:2018-04-02 22:38:16  File:/var/Website/Socket/core/Forward.php  Line:638  Message:Call to a member function send() on resource
+#0 /var/Website/Socket/core/Forward.php Core\Forward->_forkForChild(684)
+#1 /var/Website/Socket/core/Forward.php Core\Forward->fork(1197)
+#2 /var/Website/Socket/test/forward.php Core\Forward->run(120)
 ----- Exception End ------
 
